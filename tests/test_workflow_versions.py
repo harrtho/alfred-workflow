@@ -1,18 +1,19 @@
+#!/usr/bin/env python3
 # encoding: utf-8
-# Copyright (c) 2019 Dean Jackson <deanishe@deanishe.net>
-# MIT Licence applies http://opensource.org/licenses/MIT
 #
-# Created 2019-05-05
-
+# Copyright (c) 2022 Thomas Harr <xDevThomas@gmail.com>
+# Copyright (c) 2019 Dean Jackson <deanishe@deanishe.net>
+#
+# MIT Licence. See http://opensource.org/licenses/MIT
+#
+# Created on 2019-05-05
+#
 """Unit tests for workflow version determination."""
-
-from __future__ import print_function, unicode_literals
 
 import pytest
 
 from workflow.update import Version
-from workflow.workflow import Workflow
-from workflow.workflow3 import Workflow3
+from workflow import Workflow
 
 from .conftest import env, WORKFLOW_VERSION
 from .util import VersionFile
@@ -20,7 +21,7 @@ from .util import VersionFile
 
 def test_info_plist(infopl):
     """Version from info.plist."""
-    wf = Workflow3()
+    wf = Workflow()
     assert wf.version == Version('1.1.1'), "unexpected version"
 
 
@@ -28,17 +29,17 @@ def test_envvar(infopl):
     """Version from environment variable."""
     v = '1.1.2'
     with env(alfred_workflow_version=v):
-        wf = Workflow3()
+        wf = Workflow()
         assert wf.version == Version(v), "unexpected version"
         # environment variables have priority
-        wf = Workflow3(update_settings={'version': '1.1.3'})
+        wf = Workflow(update_settings={'version': '1.1.3'})
         assert wf.version == Version(v), "unexpected version"
 
 
 def test_update_settings(infopl):
     """Version from update_settings."""
     v = '1.1.3'
-    wf = Workflow3(update_settings={'version': v})
+    wf = Workflow(update_settings={'version': v})
     assert wf.version == Version(v), "unexpected version"
 
 

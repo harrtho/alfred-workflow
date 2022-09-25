@@ -1,7 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 #
-# Copyright (c) 2015 deanishe@deanishe.net
+# Copyright (c) 2022 Thomas Harr <xDevThomas@gmail.com>
+# Copyright (c) 2019 Dean Jackson <deanishe@deanishe.net>
 #
 # MIT Licence. See http://opensource.org/licenses/MIT
 #
@@ -22,8 +23,6 @@ It works by copying a simple application to your workflow's data
 directory. It replaces the application's icon with your workflow's
 icon and then calls the application to post notifications.
 """
-
-from __future__ import print_function, unicode_literals
 
 import os
 import plistlib
@@ -88,7 +87,7 @@ def notifier_program():
     """Return path to notifier applet executable.
 
     Returns:
-        unicode: Path to Notify.app ``applet`` executable.
+        str: Path to Notify.app ``applet`` executable.
     """
     return wf().datafile('Notify.app/Contents/MacOS/applet')
 
@@ -97,7 +96,7 @@ def notifier_icon_path():
     """Return path to icon file in installed Notify.app.
 
     Returns:
-        unicode: Path to ``applet.icns`` within the app bundle.
+        str: Path to ``applet.icns`` within the app bundle.
     """
     return wf().datafile('Notify.app/Contents/Resources/applet.icns')
 
@@ -144,10 +143,12 @@ def install_notifier():
     # Change bundle ID of installed app
     ip_path = os.path.join(app_path, 'Contents/Info.plist')
     bundle_id = '{0}.{1}'.format(wf().bundleid, uuid.uuid4().hex)
-    data = plistlib.readPlist(ip_path)
+    with open(ip_path, 'rb') as fp:
+        data = plistlib.load(fp)
     log().debug('changing bundle ID to %r', bundle_id)
     data['CFBundleIdentifier'] = bundle_id
-    plistlib.writePlist(data, ip_path)
+    with open(ip_path, 'wb') as fp:
+        plistlib.dump(data, fp)
 
 
 def validate_sound(sound):

@@ -1,6 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 #
+# Copyright (c) 2022 Thomas Harr <xDevThomas@gmail.com>
 # Copyright (c) 2017 Dean Jackson <deanishe@deanishe.net>
 #
 # MIT Licence. See http://opensource.org/licenses/MIT
@@ -10,16 +11,14 @@
 
 """Common pytest fixtures."""
 
-from __future__ import print_function, absolute_import
-
-from contextlib import contextmanager
 import os
 from shutil import rmtree
 from tempfile import mkdtemp
+from contextlib import contextmanager
 
 import pytest
 
-from workflow.workflow import Workflow
+from workflow import Workflow
 
 
 from .util import (
@@ -31,40 +30,6 @@ from .util import (
 BUNDLE_ID = 'net.deanishe.alfred-workflow'
 WORKFLOW_NAME = 'Alfred-Workflow Test'
 WORKFLOW_VERSION = '1.1.1'
-
-ENV_V2 = dict(
-    alfred_version='2.4',
-    alfred_version_build='277',
-    alfred_workflow_version=WORKFLOW_VERSION,
-    alfred_workflow_bundleid=BUNDLE_ID,
-    alfred_workflow_name=WORKFLOW_NAME,
-    alfred_workflow_cache=os.path.expanduser(
-        '~/Library/Caches/com.runningwithcrayons.Alfred-2/'
-        'Workflow Data/' + BUNDLE_ID),
-    alfred_workflow_data=os.path.expanduser(
-        '~/Library/Application Support/Alfred 2/'
-        'Workflow Data/' + BUNDLE_ID),
-    alfred_preferences=os.path.expanduser(
-        '~/Library/Application Support/Alfred 2/'
-        'Alfred.alfredpreferences'),
-)
-
-ENV_V3 = dict(
-    alfred_version='3.8.1',
-    alfred_version_build='961',
-    alfred_workflow_version=WORKFLOW_VERSION,
-    alfred_workflow_bundleid=BUNDLE_ID,
-    alfred_workflow_name=WORKFLOW_NAME,
-    alfred_workflow_cache=os.path.expanduser(
-        '~/Library/Caches/com.runningwithcrayons.Alfred-3/'
-        'Workflow Data/' + BUNDLE_ID),
-    alfred_workflow_data=os.path.expanduser(
-        '~/Library/Application Support/Alfred 3/'
-        'Workflow Data/' + BUNDLE_ID),
-    alfred_preferences=os.path.expanduser(
-        '~/Library/Application Support/Alfred 3/'
-        'Alfred.alfredpreferences'),
-)
 
 ENV_V4 = dict(
     alfred_version='4.0',
@@ -99,11 +64,11 @@ def env(**kwargs):
     prev = os.environ.copy()
     for k, v in kwargs.items():
         if v is None:
-            if k in os.environ:
+            if k in list(os.environ):
                 del os.environ[k]
         else:
-            if isinstance(v, unicode):
-                v = v.encode('utf-8')
+            if isinstance(v, str):
+                v = v
             else:
                 v = str(v)
             os.environ[k] = v
@@ -129,23 +94,14 @@ def setenv(*dicts):
 
 def cleanenv():
     """Remove Alfred variables from ``os.environ``."""
-    for k in os.environ.keys():
+    for k in list(os.environ.keys()):
         if k.startswith('alfred_'):
             del os.environ[k]
 
 
 @pytest.fixture(scope='function')
-def alfred3():
-    """Context manager that sets Alfred 3 environment variables."""
-    cleanenv()
-    setenv(COMMON, ENV_V3)
-    yield
-    cleanenv()
-
-
-@pytest.fixture(scope='function')
 def alfred4():
-    """Context manager that sets Alfred 4 environment variables."""
+    """Context manager that sets Alfred 4+ environment variables."""
     cleanenv()
     setenv(COMMON, ENV_V4)
     yield

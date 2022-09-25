@@ -1,7 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 #
-# Copyright (c) 2014 Dean Jackson <deanishe@deanishe.net>
+# Copyright (c) 2022 Thomas Harr <xDevThomas@gmail.com>
+# Copyright (c) 2019 Dean Jackson <deanishe@deanishe.net>
 #
 # MIT Licence. See http://opensource.org/licenses/MIT
 #
@@ -13,8 +14,7 @@
 import os
 
 # Workflow objects
-from .workflow import Workflow, manager
-from .workflow3 import Variables, Workflow3
+from .workflow import Workflow, Variables, manager
 
 # Exceptions
 from .workflow import PasswordNotFound, KeychainError
@@ -69,7 +69,6 @@ __copyright__ = 'Copyright 2014-2019 Dean Jackson'
 __all__ = [
     'Variables',
     'Workflow',
-    'Workflow3',
     'manager',
     'PasswordNotFound',
     'KeychainError',

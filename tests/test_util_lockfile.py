@@ -1,6 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 #
+# Copyright (c) 2022 Thomas Harr <xDevThomas@gmail.com>
 # Copyright (c) 2017 Dean Jackson <deanishe@deanishe.net>
 #
 # MIT Licence. See http://opensource.org/licenses/MIT
@@ -10,7 +11,6 @@
 
 """Test LockFile functionality."""
 
-from __future__ import print_function
 
 from collections import namedtuple
 from multiprocessing import Pool

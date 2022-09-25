@@ -1,12 +1,14 @@
+#!/usr/bin/env python3
 # encoding: utf-8
-# Copyright (c) 2019 Dean Jackson <deanishe@deanishe.net>
-# MIT Licence applies http://opensource.org/licenses/MIT
 #
-# Created 2019-05-05
-
+# Copyright (c) 2022 Thomas Harr <xDevThomas@gmail.com>
+# Copyright (c) 2019 Dean Jackson <deanishe@deanishe.net>
+#
+# MIT Licence. See http://opensource.org/licenses/MIT
+#
+# Created on 2019-05-05
+#
 """Unit tests for Workflow directory & file APIs."""
-
-from __future__ import print_function, unicode_literals
 
 import json
 import os
@@ -16,7 +18,7 @@ import pytest
 
 from workflow import manager, Workflow
 
-from conftest import env, ENV_V4, ENV_V2
+from .conftest import env, ENV_V4
 
 
 def test_directories(alfred4):
@@ -32,8 +34,8 @@ def test_directories(alfred4):
 
     # defaults
     with env(alfred_workflow_data=None, alfred_workflow_cache=None):
-        data = ENV_V2.get('alfred_workflow_data')
-        cache = ENV_V2.get('alfred_workflow_cache')
+        data = ENV_V4.get('alfred_workflow_data')
+        cache = ENV_V4.get('alfred_workflow_cache')
         wf = Workflow()
         assert wf.datadir == data
         assert os.path.exists(wf.datadir)
@@ -73,7 +75,7 @@ def test_cached_data_deleted(wf):
     d = wf.cached_data('test', lambda: data, max_age=10)
     assert data == d
     assert wf.cache_data('test', None) is None
-    assert not os.path.exists(wf.cachefile('test.cpickle'))
+    assert not os.path.exists(wf.cachefile('test.pickle'))
     # Test alternate code path for non-existent file
     assert wf.cache_data('test', None) is None
 
@@ -81,8 +83,8 @@ def test_cached_data_deleted(wf):
 def test_delete_all_cache_file(wf):
     """Cached data are all deleted"""
     data = {'key1': 'value1'}
-    test_file1 = 'test1.cpickle'
-    test_file2 = 'test2.cpickle'
+    test_file1 = 'test1.pickle'
+    test_file2 = 'test2.pickle'
 
     wf.cached_data('test1', lambda: data, max_age=10)
     wf.cached_data('test2', lambda: data, max_age=10)
@@ -96,8 +98,8 @@ def test_delete_all_cache_file(wf):
 def test_delete_all_cache_file_with_filter_func(wf):
     """Only part of cached data are deleted"""
     data = {'key1': 'value1'}
-    test_file1 = 'test1.cpickle'
-    test_file2 = 'test2.cpickle'
+    test_file1 = 'test1.pickle'
+    test_file2 = 'test2.pickle'
 
     def filter_func(file):
         if file == test_file1:
@@ -181,27 +183,21 @@ def test_cache_fresh_non_existent(wf):
 def test_cache_serializer(wf):
     """Cache serializer"""
     # default
-    assert wf.cache_serializer == 'cpickle'
+    assert wf.cache_serializer == 'pickle'
     # unsupported format
     with pytest.raises(ValueError):
         wf.cache_serializer = 'non-existent'
     # default unchanged
-    assert wf.cache_serializer == 'cpickle'
-    wf.cache_serializer = 'pickle'
-    # other built-in
     assert wf.cache_serializer == 'pickle'
+    wf.cache_serializer = 'json'
+    # other built-in
+    assert wf.cache_serializer == 'json'
 
 
 def test_alternative_cache_serializer(wf):
     """Alternative cache serializer"""
     data = {'key1': 'value1'}
-    assert wf.cache_serializer == 'cpickle'
-    wf.cache_data('test', data)
-    assert os.path.exists(wf.cachefile('test.cpickle'))
-    assert wf.cached_data('test') == data
-
-    wf.cache_serializer = 'pickle'
-    assert wf.cached_data('test') is None
+    assert wf.cache_serializer == 'pickle'
     wf.cache_data('test', data)
     assert os.path.exists(wf.cachefile('test.pickle'))
     assert wf.cached_data('test') == data
@@ -226,7 +222,7 @@ def test_custom_cache_serializer(wf):
 
         @classmethod
         def dump(self, obj, file_obj):
-            return json.dump(obj, file_obj, indent=2)
+            return file_obj.write(bytes(json.dumps(obj, indent=2), 'utf-8'))
 
     manager.register('spoons', MySerializer)
     try:
@@ -249,28 +245,21 @@ def _stored_data_paths(wf, name, serializer):
 def test_data_serializer(wf):
     """Data serializer"""
     # default
-    assert wf.data_serializer == 'cpickle'
+    assert wf.data_serializer == 'pickle'
     # unsupported format
     with pytest.raises(ValueError):
         wf.data_serializer = 'non-existent'
     # default unchanged
-    assert wf.data_serializer == 'cpickle'
-    wf.data_serializer = 'pickle'
-    # other built-in
     assert wf.data_serializer == 'pickle'
+    wf.data_serializer = 'json'
+    # other built-in
+    assert wf.data_serializer == 'json'
 
 
 def test_alternative_data_serializer(wf):
     """Alternative data serializer"""
     data = {'key1': 'value1'}
-    assert wf.data_serializer == 'cpickle'
-    wf.store_data('test', data)
-    for path in _stored_data_paths(wf, 'test', 'cpickle'):
-        assert os.path.exists(path)
-    assert wf.stored_data('test') == data
-
-    wf.data_serializer = 'pickle'
-    assert wf.stored_data('test') == data
+    assert wf.data_serializer == 'pickle'
     wf.store_data('test', data)
     for path in _stored_data_paths(wf, 'test', 'pickle'):
         assert os.path.exists(path)
@@ -294,18 +283,18 @@ def test_borked_stored_data(wf):
     data = {'key7': 'value7'}
 
     wf.store_data('test', data)
-    metadata, datapath = _stored_data_paths(wf, 'test', 'cpickle')
+    metadata, datapath = _stored_data_paths(wf, 'test', 'pickle')
     os.unlink(metadata)
     assert wf.stored_data('test') is None
 
     wf.store_data('test', data)
-    metadata, datapath = _stored_data_paths(wf, 'test', 'cpickle')
+    metadata, datapath = _stored_data_paths(wf, 'test', 'pickle')
     os.unlink(datapath)
     assert wf.stored_data('test') is None
 
     wf.store_data('test', data)
-    metadata, datapath = _stored_data_paths(wf, 'test', 'cpickle')
-    with open(metadata, 'wb') as file_obj:
+    metadata, datapath = _stored_data_paths(wf, 'test', 'pickle')
+    with open(metadata, 'w') as file_obj:
         file_obj.write('bangers and mash')
         wf.logger.debug('Changed format to `bangers and mash`')
     with pytest.raises(ValueError):
@@ -331,7 +320,7 @@ def test_delete_stored_data(wf):
     """Delete stored data"""
     data = {'key7': 'value7'}
 
-    paths = _stored_data_paths(wf, 'test', 'cpickle')
+    paths = _stored_data_paths(wf, 'test', 'pickle')
 
     wf.store_data('test', data)
     assert wf.stored_data('test') == data
@@ -345,8 +334,8 @@ def test_delete_stored_data(wf):
 def test_delete_all_stored_data_file(wf):
     """Stored data are all deleted"""
     data = {'key1': 'value1'}
-    test_file1 = 'test1.cpickle'
-    test_file2 = 'test2.cpickle'
+    test_file1 = 'test1.pickle'
+    test_file2 = 'test2.pickle'
 
     wf.store_data('test1', data)
     wf.store_data('test2', data)
@@ -360,8 +349,8 @@ def test_delete_all_stored_data_file(wf):
 def test_delete_all_data_file_with_filter_func(wf):
     """Only part of stored data are deleted"""
     data = {'key1': 'value1'}
-    test_file1 = 'test1.cpickle'
-    test_file2 = 'test2.cpickle'
+    test_file1 = 'test1.pickle'
+    test_file2 = 'test2.pickle'
 
     def filter_func(file):
         if file == test_file1:

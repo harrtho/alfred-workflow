@@ -1,22 +1,24 @@
+#!/usr/bin/env python3
 # encoding: utf-8
-# Copyright (c) 2019 Dean Jackson <deanishe@deanishe.net>
-# MIT Licence applies http://opensource.org/licenses/MIT
 #
-# Created 2019-05-05
-
+# Copyright (c) 2022 Thomas Harr <xDevThomas@gmail.com>
+# Copyright (c) 2019 Dean Jackson <deanishe@deanishe.net>
+#
+# MIT Licence. See http://opensource.org/licenses/MIT
+#
+# Created on 2019-05-05
+#
 """Unit tests for sys.path manipulation."""
-
-from __future__ import print_function, unicode_literals
 
 import os
 import sys
 
 import pytest
 
-from workflow.workflow import Workflow
+from workflow import Workflow
 
 
-LIBS = [os.path.join(os.path.dirname(__file__), b'lib')]
+LIBS = [os.path.join(os.path.dirname(__file__), 'lib')]
 
 
 def test_additional_libs(alfred4, infopl):

@@ -1,12 +1,14 @@
+#!/usr/bin/env python3
 # encoding: utf-8
+#
+# Copyright (c) 2022 Thomas Harr <xDevThomas@gmail.com>
 # Copyright (c) 2019 Dean Jackson <deanishe@deanishe.net>
-# MIT Licence applies http://opensource.org/licenses/MIT
+#
+# MIT Licence. See http://opensource.org/licenses/MIT
 #
 # Created on 2019-05-05
-
+#
 """Unit tests for Alfred 2 magic argument handling."""
-
-from __future__ import print_function
 
 import pytest
 

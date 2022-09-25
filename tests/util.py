@@ -1,7 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 #
-# Copyright (c) 2014 deanishe@deanishe.net
+# Copyright (c) 2022 Thomas Harr <xDevThomas@gmail.com>
+# Copyright (c) 2019 Dean Jackson <deanishe@deanishe.net>
 #
 # MIT Licence. See http://opensource.org/licenses/MIT
 #
@@ -10,9 +11,7 @@
 
 """Stuff used in multiple tests."""
 
-from __future__ import print_function, unicode_literals
-
-from cStringIO import StringIO
+from io import StringIO
 import sys
 import os
 import shutil
@@ -26,10 +25,10 @@ INFO_PLIST_TEST3 = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                                 'data/info.plist.alfred3')
 
 
-INFO_PLIST_PATH = os.path.join(os.path.abspath(os.getcwdu()),
+INFO_PLIST_PATH = os.path.join(os.path.abspath(os.getcwd()),
                                'info.plist')
 
-VERSION_PATH = os.path.join(os.path.abspath(os.getcwdu()),
+VERSION_PATH = os.path.join(os.path.abspath(os.getcwd()),
                             'version')
 
 DEFAULT_SETTINGS = {
@@ -157,7 +156,7 @@ class VersionFile(object):
     def __enter__(self):
         """Create version file."""
         with open(self.path, 'wb') as fp:
-            fp.write(self.version)
+            fp.write(self.version.encode('utf-8'))
         print('version {0} in {1}'.format(self.version, self.path),
               file=sys.stderr)
 
@@ -184,9 +183,9 @@ class FakePrograms(object):
         self.tempdir = tempfile.mkdtemp()
         for name, retcode in self.programs.items():
             path = os.path.join(self.tempdir, name)
-            with open(path, 'wb') as fp:
+            with open(path, 'w') as fp:
                 fp.write("#!/bin/bash\n\nexit {0}\n".format(retcode))
-            os.chmod(path, 0700)
+            os.chmod(path, 0o700)
 
         # Add new programs to front of PATH
         self.orig_path = os.getenv('PATH')

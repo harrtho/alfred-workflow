@@ -1,21 +1,24 @@
+#!/usr/bin/env python3
 # encoding: utf-8
-# Copyright (c) 2019 Dean Jackson <deanishe@deanishe.net>
-# MIT Licence applies http://opensource.org/licenses/MIT
 #
-# Created 2019-05-05
-
+# Copyright (c) 2022 Thomas Harr <xDevThomas@gmail.com>
+# Copyright (c) 2019 Dean Jackson <deanishe@deanishe.net>
+#
+# MIT Licence. See http://opensource.org/licenses/MIT
+#
+# Created on 2019-05-05
+#
 """Unit tests for Workflow.run."""
 
-from __future__ import print_function, unicode_literals
-
-from StringIO import StringIO
+from io import StringIO
 import sys
+import json
 
 import pytest
 
-from workflow.workflow import Workflow
+from workflow import Workflow
 
-from conftest import env
+from .conftest import env
 
 
 def test_run_fails(infopl):
@@ -46,8 +49,8 @@ def test_run_fails(infopl):
     wf.reset()
 
 
-def test_run_fails_with_xml_output(wf):
-    """Run fails with XML output"""
+def test_run_fails_with_json_output(wf):
+    """Run fails with JSON output"""
     error_text = 'Have an error'
     stdout = sys.stdout
     buf = StringIO()
@@ -65,7 +68,7 @@ def test_run_fails_with_xml_output(wf):
 
     assert ret == 1
     assert error_text in output
-    assert '<?xml' in output
+    assert type(json.loads(output)) == type(dict())
 
 
 def test_run_fails_with_plain_text_output(wf):
@@ -87,13 +90,13 @@ def test_run_fails_with_plain_text_output(wf):
 
     assert ret == 1
     assert error_text in output
-    assert '<?xml' not in output
+    assert '"items":' not in output
 
 
 def test_run_fails_borked_settings(wf):
     """Run fails with borked settings.json"""
     # Create invalid settings.json file
-    with open(wf.settings_path, 'wb') as fp:
+    with open(wf.settings_path, 'w') as fp:
         fp.write('')
 
     def fake(wf):

@@ -1,29 +1,31 @@
+#!/usr/bin/env python3
 # encoding: utf-8
-# Copyright (c) 2019 Dean Jackson <deanishe@deanishe.net>
-# MIT Licence applies http://opensource.org/licenses/MIT
 #
-# Created 2019-05-05
-
+# Copyright (c) 2022 Thomas Harr <xDevThomas@gmail.com>
+# Copyright (c) 2019 Dean Jackson <deanishe@deanishe.net>
+#
+# MIT Licence. See http://opensource.org/licenses/MIT
+#
+# Created on 2019-05-05
+#
 """Unit tests for serializers."""
-
-from __future__ import print_function, unicode_literals
 
 import pytest
 
 
 def test_unicode_paths(wf):
     """Workflow paths are Unicode"""
-    s = b'test.txt'
-    u = u'über.txt'
-    assert isinstance(wf.datadir, unicode)
-    assert isinstance(wf.datafile(s), unicode)
-    assert isinstance(wf.datafile(u), unicode)
-    assert isinstance(wf.cachedir, unicode)
-    assert isinstance(wf.cachefile(s), unicode)
-    assert isinstance(wf.cachefile(u), unicode)
-    assert isinstance(wf.workflowdir, unicode)
-    assert isinstance(wf.workflowfile(s), unicode)
-    assert isinstance(wf.workflowfile(u), unicode)
+    b = b'test.txt'
+    s = 'über.txt'
+    assert isinstance(wf.datadir, str)
+    assert isinstance(wf.datafile(b), str)
+    assert isinstance(wf.datafile(s), str)
+    assert isinstance(wf.cachedir, str)
+    assert isinstance(wf.cachefile(b), str)
+    assert isinstance(wf.cachefile(s), str)
+    assert isinstance(wf.workflowdir, str)
+    assert isinstance(wf.workflowfile(b), str)
+    assert isinstance(wf.workflowfile(s), str)
 
 
 if __name__ == '__main__':  # pragma: no cover

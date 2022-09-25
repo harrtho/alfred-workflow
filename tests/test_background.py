@@ -1,6 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 #
+# Copyright (c) 2022 Thomas Harr <xDevThomas@gmail.com>
 # Copyright (c) 2017 Dean Jackson <deanishe@deanishe.net>
 #
 # MIT Licence. See http://opensource.org/licenses/MIT
@@ -9,8 +10,6 @@
 #
 
 """Unit tests for :mod:`workflow.background`."""
-
-from __future__ import print_function, absolute_import
 
 import os
 from time import sleep
@@ -27,7 +26,7 @@ def _pidfile(name):
 
 def _write_pidfile(name, pid):
     pidfile = _pidfile(name)
-    with open(pidfile, 'wb') as file:
+    with open(pidfile, 'w') as file:
         file.write('{0}'.format(pid))
 
 

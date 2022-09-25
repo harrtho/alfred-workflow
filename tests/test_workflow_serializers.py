@@ -1,16 +1,15 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 #
-# Copyright (c) 2017 Dean Jackson <deanishe@deanishe.net>
+# Copyright (c) 2022 Thomas Harr <xDevThomas@gmail.com>
+# Copyright (c) 2019 Dean Jackson <deanishe@deanishe.net>
 #
 # MIT Licence. See http://opensource.org/licenses/MIT
 #
 # Created on 2017-05-06
 #
-
+#
 """Unit tests for serializer classes."""
-
-from __future__ import print_function, absolute_import
 
 import os
 
@@ -19,21 +18,19 @@ import pytest
 from workflow.workflow import (
     SerializerManager,
     JSONSerializer,
-    CPickleSerializer,
     PickleSerializer,
     manager as default_manager,
 )
 
 
 # default serializers
-SERIALIZERS = ('json', 'cpickle', 'pickle')
+SERIALIZERS = ('json', 'pickle')
 
 
 @pytest.fixture(scope='function')
 def manager():
     """Create a `SerializerManager` with the default config."""
     m = SerializerManager()
-    m.register('cpickle', CPickleSerializer)
     m.register('pickle', PickleSerializer)
     m.register('json', JSONSerializer)
     yield m

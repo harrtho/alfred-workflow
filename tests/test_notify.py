@@ -1,6 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 #
+# Copyright (c) 2022 Thomas Harr <xDevThomas@gmail.com>
 # Copyright (c) 2016 Dean Jackson <deanishe@deanishe.net>
 #
 # MIT Licence. See http://opensource.org/licenses/MIT
@@ -10,7 +11,6 @@
 
 """Unit tests for notifications."""
 
-from __future__ import print_function
 
 import hashlib
 import logging
@@ -22,10 +22,10 @@ import stat
 import pytest
 
 from workflow import notify
-from workflow.workflow import Workflow
+from workflow import Workflow
 
-from conftest import BUNDLE_ID
-from util import (
+from .conftest import BUNDLE_ID
+from .util import (
     FakePrograms,
     WorkflowMock,
 )
@@ -84,7 +84,8 @@ def test_install(infopl, alfred4, applet):
     assert (os.stat(APPLET_PATH).st_mode & stat.S_IXUSR), \
         "applet not executable"
     # Verify bundle ID was changed
-    data = plistlib.readPlist(INFO_PATH)
+    with open(INFO_PATH, 'rb') as fp:
+        data = plistlib.load(fp)
     bid = data.get('CFBundleIdentifier')
     assert bid != BUNDLE_ID, "bundle IDs identical"
     assert bid.startswith(BUNDLE_ID) is True, "bundle ID not prefix"

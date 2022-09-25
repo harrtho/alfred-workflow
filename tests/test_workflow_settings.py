@@ -1,7 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 #
-# Copyright (c) 2016 Dean Jackson <deanishe@deanishe.net>
+# Copyright (c) 2022 Thomas Harr <xDevThomas@gmail.com>
+# Copyright (c) 2019 Dean Jackson <deanishe@deanishe.net>
 #
 # MIT Licence. See http://opensource.org/licenses/MIT
 #
@@ -9,8 +10,6 @@
 #
 
 """Unit tests for Workflow.settings API."""
-
-from __future__ import print_function, unicode_literals, absolute_import
 
 import json
 import os
@@ -21,7 +20,7 @@ import unittest
 
 from workflow.workflow import Settings
 
-from tests.util import DEFAULT_SETTINGS
+from .util import DEFAULT_SETTINGS
 
 
 class SettingsTests(unittest.TestCase):
@@ -31,7 +30,7 @@ class SettingsTests(unittest.TestCase):
         """Initialise unit test environment."""
         self.tempdir = tempfile.mkdtemp()
         self.settings_file = os.path.join(self.tempdir, 'settings.json')
-        with open(self.settings_file, 'wb') as file_obj:
+        with open(self.settings_file, 'w') as file_obj:
             json.dump(DEFAULT_SETTINGS, file_obj)
 
     def tearDown(self):
