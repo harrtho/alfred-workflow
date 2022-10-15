@@ -11,12 +11,10 @@
 
 """Stuff used in multiple tests."""
 
-from io import StringIO
-import sys
 import os
-import shutil
 import subprocess
-import tempfile
+import sys
+from io import StringIO
 
 INFO_PLIST_TEST = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                                'data/info.plist.alfred2')
@@ -164,40 +162,6 @@ class VersionFile(object):
         """Remove version file."""
         if os.path.exists(self.path):
             os.unlink(self.path)
-
-
-class FakePrograms(object):
-    """Context manager to inject fake programs into ``PATH``."""
-
-    def __init__(self, *names, **names2codes):
-        """Create new context manager."""
-        self.tempdir = None
-        self.orig_path = None
-        self.programs = {}
-        for n in names:
-            self.programs[n] = 1
-        self.programs.update(names2codes)
-
-    def __enter__(self):
-        """Inject program(s) into PATH."""
-        self.tempdir = tempfile.mkdtemp()
-        for name, retcode in self.programs.items():
-            path = os.path.join(self.tempdir, name)
-            with open(path, 'w') as fp:
-                fp.write("#!/bin/bash\n\nexit {0}\n".format(retcode))
-            os.chmod(path, 0o700)
-
-        # Add new programs to front of PATH
-        self.orig_path = os.getenv('PATH')
-        os.environ['PATH'] = self.tempdir + ':' + self.orig_path
-
-    def __exit__(self, *args):
-        """Remove program(s) from PATH."""
-        os.environ['PATH'] = self.orig_path
-        try:
-            shutil.rmtree(self.tempdir)
-        except OSError:
-            pass
 
 
 class InfoPlist(object):
