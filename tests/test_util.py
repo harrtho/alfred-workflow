@@ -17,27 +17,14 @@ import subprocess
 import tempfile
 
 import pytest
+from workflow.util import (action_in_alfred, appinfo, applescriptify,
+                           browse_in_alfred, jxa_app_name, reload_workflow,
+                           run_applescript, run_command, run_jxa, run_trigger,
+                           search_in_alfred, set_config, set_theme, unicodify,
+                           unset_config)
 
-from .conftest import env
-from .util import MockCall
-
-from workflow.util import (
-    action_in_alfred,
-    appinfo,
-    applescriptify,
-    browse_in_alfred,
-    jxa_app_name,
-    reload_workflow,
-    run_applescript,
-    run_command,
-    run_jxa,
-    run_trigger,
-    search_in_alfred,
-    set_config,
-    set_theme,
-    unicodify,
-    unset_config,
-)
+from tests.conftest import env
+from tests.util import MockCall
 
 
 @pytest.fixture(scope='function')
@@ -201,7 +188,7 @@ def test_run_trigger(alfred4):
     script = (
         'Application("com.runningwithcrayons.Alfred")'
         '.runTrigger("test", '
-        '{"inWorkflow": "net.deanishe.alfred-workflow"});'
+        '{"inWorkflow": "de.xdevcloud.alfred-workflow"});'
     )
     cmd = ['/usr/bin/osascript', '-l', 'JavaScript', '-e', script]
     with MockCall() as m:
@@ -248,7 +235,7 @@ def test_set_config(alfred4):
         'Application("com.runningwithcrayons.Alfred")'
         '.setConfiguration("test", '
         '{"exportable": false, '
-        '"inWorkflow": "net.deanishe.alfred-workflow", '
+        '"inWorkflow": "de.xdevcloud.alfred-workflow", '
         '"toValue": "test"});'
     )
     cmd = ['/usr/bin/osascript', '-l', 'JavaScript', '-e', script]
@@ -350,7 +337,7 @@ def test_reload_workflow(alfred4):
     # With bundle ID from env
     script = (
         'Application("com.runningwithcrayons.Alfred")'
-        '.reloadWorkflow("net.deanishe.alfred-workflow");'
+        '.reloadWorkflow("de.xdevcloud.alfred-workflow");'
     )
     cmd = ['/usr/bin/osascript', '-l', 'JavaScript', '-e', script]
     with MockCall() as m:

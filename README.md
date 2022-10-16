@@ -6,7 +6,7 @@
 Alfred-Workflow
 ===============
 
-A helper library in Python for authors of workflows for [Alfred 3 and 4][alfred].
+A helper library in Python for authors of workflows for [Alfred 4 and 5][alfred].
 
 <!-- [![Build Status][shield-travis]][travis] -->
 [![Build Status][shield-github]][action-github]
@@ -17,7 +17,7 @@ A helper library in Python for authors of workflows for [Alfred 3 and 4][alfred]
 
 <!-- [![Downloads][shield-download]][pypi] -->
 
-Supports Alfred 3 and Alfred 4 on macOS 10.7+ (Python 2.7).
+Supports Alfred 4 and Alfred 5 on macOS Catalina or later (Python 3.7).
 
 Alfred-Workflow takes the grunt work out of writing a workflow by giving you the tools to create a fast and featureful Alfred workflow from an API, application or library in minutes.
 
@@ -46,7 +46,6 @@ Features
 ### Alfred 4+ features ###
 
 - Advanced modifiers
-- Alfred 4-only updates (won't break older Alfred installs)
 
 
 Contents
@@ -136,29 +135,28 @@ A few examples of how to use Alfred-Workflow.
 Set up your workflow scripts as follows (if you wish to use the built-in error handling or `sys.path` modification):
 
 ```python
-#!/usr/bin/python
+#!/usr/bin/env python3
 # encoding: utf-8
 
 import sys
 
-# Workflow3 supports Alfred 3's new features. The `Workflow` class
-# is also compatible with Alfred 2.
-from workflow import Workflow3
+# Workflow supports Alfred 3's new features.
+from workflow import Workflow
 
 
 def main(wf):
-    # The Workflow3 instance will be passed to the function
-    # you call from `Workflow3.run`.
+    # The Workflow instance will be passed to the function
+    # you call from `Workflow.run`.
     # Not super useful, as the `wf` object created in
     # the `if __name__ ...` clause below is global...
     #
     # Your imports go here if you want to catch import errors, which
     # is not a bad idea, or if the modules/packages are in a directory
-    # added via `Workflow3(libraries=...)`
+    # added via `Workflow(libraries=...)`
     import somemodule
     import anothermodule
 
-    # Get args from Workflow3, already in normalized Unicode.
+    # Get args from Workflow, already in normalized Unicode.
     # This is also necessary for "magic" arguments to work.
     args = wf.args
 
@@ -174,9 +172,9 @@ def main(wf):
 
 
 if __name__ == '__main__':
-    # Create a global `Workflow3` object
-    wf = Workflow3()
-    # Call your entry function via `Workflow3.run()` to enable its
+    # Create a global `Workflow` object
+    wf = Workflow()
+    # Call your entry function via `Workflow.run()` to enable its
     # helper functions, like exception catching, ARGV normalization,
     # magic arguments etc.
     sys.exit(wf.run(main))

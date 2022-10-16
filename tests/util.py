@@ -16,11 +16,11 @@ import subprocess
 import sys
 from io import StringIO
 
-INFO_PLIST_TEST = os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                               'data/info.plist.alfred2')
+INFO_PLIST_TEST4 = os.path.join(os.path.abspath(os.path.dirname(__file__)),
+                               'data/info.plist.alfred4')
 
-INFO_PLIST_TEST3 = os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                                'data/info.plist.alfred3')
+INFO_PLIST_TEST = os.path.join(os.path.abspath(os.path.dirname(__file__)),
+                                'data/info.plist.alfred5')
 
 
 INFO_PLIST_PATH = os.path.join(os.path.abspath(os.getcwd()),
@@ -169,7 +169,7 @@ class InfoPlist(object):
 
     def __init__(self, path=None, dest_path=None, present=True):
         """Create new `InfoPlist` with paths."""
-        self.path = path or INFO_PLIST_TEST
+        self.path = path or INFO_PLIST_TEST4
         self.dest_path = dest_path or INFO_PLIST_PATH
         # Whether or not Info.plist should be created or deleted
         self.present = present
@@ -194,7 +194,7 @@ def dump_env():
             print('env: %s=%s' % (k, v))
 
 
-def create_info_plist(source=INFO_PLIST_TEST, dest=INFO_PLIST_PATH):
+def create_info_plist(source=INFO_PLIST_TEST4, dest=INFO_PLIST_PATH):
     """Symlink ``source`` to ``dest``."""
     if os.path.exists(source) and not os.path.exists(dest):
         os.symlink(source, dest)

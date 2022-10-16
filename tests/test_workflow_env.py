@@ -14,14 +14,10 @@ import logging
 import os
 
 import pytest
-
 from workflow import Workflow
 
-from .conftest import (
-    env, COMMON, ENV_V4,
-    BUNDLE_ID, WORKFLOW_NAME,
-)
-from .util import INFO_PLIST_PATH, dump_env
+from tests.conftest import BUNDLE_ID, COMMON, ENV_V4, WORKFLOW_NAME, env
+from tests.util import INFO_PLIST_PATH, dump_env
 
 
 def test_file(infopl):

@@ -1,7 +1,7 @@
 
-A helper library for writing `Alfred 2, 3 and 4`_ workflows.
+A helper library for writing `Alfred 4 and 5`_ workflows.
 
-Supports macOS 10.7+ and Python 2.7 (Alfred 3 is 10.9+/2.7 only).
+Supports macOS Catalina and Python 3.7+.
 
 Alfred-Workflow is designed to take the grunt work out of writing a workflow.
 
@@ -46,7 +46,7 @@ Here's how to show recent `Pinboard.in <https://pinboard.in/>`_ posts
 in Alfred.
 
 Create a new workflow in Alfred's preferences. Add a **Script Filter** with
-Language ``/usr/bin/python`` and paste the following into the **Script**
+Language ``/usr/bin/python3`` and paste the following into the **Script**
 field (changing ``API_KEY``):
 
 
@@ -142,7 +142,7 @@ http://www.deanishe.net/alfred-workflow/.
 
 .. _v2 branch: https://github.com/deanishe/alfred-workflow/tree/v2
 .. _requests: http://docs.python-requests.org/en/latest/
-.. _Alfred 2, 3 and 4: http://www.alfredapp.com/
+.. _Alfred 4 and 5: http://www.alfredapp.com/
 .. _GitHub releases: https://github.com/deanishe/alfred-workflow/releases
 .. _the source code: https://github.com/deanishe/alfred-workflow/archive/master.zip
 .. _GitHub repository: https://github.com/deanishe/alfred-workflow

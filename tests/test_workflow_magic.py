@@ -14,11 +14,10 @@
 import os
 
 import pytest
-
 from workflow import Workflow
 
-from .conftest import env
-from .util import VersionFile, WorkflowMock
+from tests.conftest import env
+from tests.util import VersionFile, WorkflowMock
 
 
 def test_list_magic(infopl):
@@ -32,7 +31,7 @@ def test_list_magic(infopl):
         wf.reset()
 
 
-def test_version_magic(infopl):
+def test_version_magic(infopl4):
     """Magic: version magic"""
     # TODO: Verify output somehow
 
@@ -56,7 +55,7 @@ def test_version_magic(infopl):
             assert not c.cmd
             wf.reset()
 
-    # Environment variable
+    # Version from environment variable
     with env(alfred_workflow_version=vstr):
         with WorkflowMock(['script', 'workflow:version']) as c:
             wf = Workflow()

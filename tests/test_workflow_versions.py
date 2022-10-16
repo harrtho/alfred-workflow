@@ -11,18 +11,17 @@
 """Unit tests for workflow version determination."""
 
 import pytest
-
-from workflow.update import Version
 from workflow import Workflow
+from workflow.update import Version
 
-from .conftest import env, WORKFLOW_VERSION
-from .util import VersionFile
+from tests.conftest import WORKFLOW_VERSION, env
+from tests.util import VersionFile
 
 
 def test_info_plist(infopl):
     """Version from info.plist."""
     wf = Workflow()
-    assert wf.version == Version('1.1.1'), "unexpected version"
+    assert wf.version == Version('2.0'), "unexpected version"
 
 
 def test_envvar(infopl):
@@ -43,11 +42,11 @@ def test_update_settings(infopl):
     assert wf.version == Version(v), "unexpected version"
 
 
-def test_versions_from_settings(alfred4, infopl2):
+def test_versions_from_settings(alfred4, infopl4):
     """Workflow: version from `update_settings`"""
     vstr = '1.9.7'
     d = {
-        'github_slug': 'deanishe/alfred-workflow',
+        'github_slug': 'harrtho/alfred-workflow',
         'version': vstr,
     }
     with env(alfred_workflow_version=None):
@@ -57,7 +56,7 @@ def test_versions_from_settings(alfred4, infopl2):
         assert wf.version == Version(vstr)
 
 
-def test_versions_from_file(alfred4, infopl2):
+def test_versions_from_file(alfred4, infopl4):
     """Workflow: version from `version` file"""
     vstr = '1.9.7'
     with env(alfred_workflow_version=None):
@@ -77,7 +76,7 @@ def test_versions_from_info(alfred4, infopl):
         assert wf.version == Version(WORKFLOW_VERSION)
 
 
-def test_first_run_no_version(alfred4, infopl2):
+def test_first_run_no_version(alfred4, infopl4):
     """Workflow: first_run fails on no version"""
     with env(alfred_workflow_version=None):
         wf = Workflow()
@@ -132,7 +131,7 @@ def test_last_version_on(alfred4, infopl):
         wf.reset()
 
 
-def test_versions_no_version(alfred4, infopl2):
+def test_versions_no_version(alfred4, infopl4):
     """Workflow: version is `None`"""
     with env(alfred_workflow_version=None):
         wf = Workflow()
@@ -140,7 +139,7 @@ def test_versions_no_version(alfred4, infopl2):
         wf.reset()
 
 
-def test_last_version_no_version(alfred4, infopl2):
+def test_last_version_no_version(alfred4, infopl4):
     """Workflow: last_version no version"""
     with env(alfred_workflow_version=None):
         wf = Workflow()

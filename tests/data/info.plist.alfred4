@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>net.deanishe.alfred-workflow</string>
+	<string>de.xdevcloud.alfred-workflow</string>
 	<key>connections</key>
 	<dict/>
 	<key>createdby</key>
-	<string>Dean Jackson</string>
+	<string>Thomas Harr</string>
 	<key>description</key>
 	<string>Test alfred-workflow library</string>
 	<key>disabled</key>
@@ -21,6 +21,12 @@
 			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
@@ -38,7 +44,7 @@
 				<key>runningsubtext</key>
 				<string>Doin' stuff…</string>
 				<key>script</key>
-				<string>python test.py "$@"</string>
+				<string>python3 test.py "$@"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -55,26 +61,24 @@
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>5F480F88-2088-4D34-B621-ACEBCB5E6753</string>
+			<string>CBC55CF4-47F4-4990-BD58-F2E451CF280C</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>5F480F88-2088-4D34-B621-ACEBCB5E6753</key>
+		<key>CBC55CF4-47F4-4990-BD58-F2E451CF280C</key>
 		<dict>
 			<key>xpos</key>
-			<integer>30</integer>
+			<real>105</real>
 			<key>ypos</key>
-			<integer>30</integer>
+			<real>180</real>
 		</dict>
 	</dict>
-	<key>version</key>
-	<string>1.1.1</string>
 	<key>webaddress</key>
-	<string></string>
+	<string>https://github.com/harrtho/alfred-workflow</string>
 </dict>
 </plist>

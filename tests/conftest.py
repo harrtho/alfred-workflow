@@ -19,11 +19,11 @@ from tempfile import mkdtemp
 import pytest
 from workflow import Workflow
 
-from tests.util import INFO_PLIST_TEST, INFO_PLIST_TEST3, InfoPlist
+from tests.util import INFO_PLIST_TEST, INFO_PLIST_TEST4, InfoPlist
 
-BUNDLE_ID = 'net.deanishe.alfred-workflow'
+BUNDLE_ID = 'de.xdevcloud.alfred-workflow'
 WORKFLOW_NAME = 'Alfred-Workflow Test'
-WORKFLOW_VERSION = '1.1.1'
+WORKFLOW_VERSION = '2.0.0'
 
 ENV_V4 = dict(
     alfred_version='4.0',
@@ -113,14 +113,14 @@ def tempdir():
 
 
 @pytest.fixture()
-def infopl2():
+def infopl4():
     """Ensure ``info.plist`` exists in the working directory."""
-    with InfoPlist(INFO_PLIST_TEST):
+    with InfoPlist(INFO_PLIST_TEST4):
         yield
 
 
 @pytest.fixture()
 def infopl():
     """Ensure ``info.plist`` exists in the working directory."""
-    with InfoPlist(INFO_PLIST_TEST3):
+    with InfoPlist(INFO_PLIST_TEST):
         yield

@@ -11,20 +11,18 @@
 
 """Unit tests for :mod:`workflow.Workflow`."""
 
+import json
 import logging
 import os
 import sys
-import json
-
 from io import StringIO
 from unicodedata import normalize
 
 import pytest
-
 from workflow import ICON_WARNING, Variables, Workflow
 
-from .test_util import MockCall
-from .conftest import env
+from tests.conftest import env
+from tests.test_util import MockCall
 
 
 def test_args(alfred4):
@@ -304,7 +302,7 @@ def _test_persistent_variables(appname):
             'Application("' + appname + '")'
             '.setConfiguration("testvar", '
             '{"exportable": false, '
-            '"inWorkflow": "net.deanishe.alfred-workflow", '
+            '"inWorkflow": "de.xdevcloud.alfred-workflow", '
             '"toValue": "testval"});'
         )
 

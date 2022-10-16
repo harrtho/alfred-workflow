@@ -29,7 +29,6 @@ up your Python script to best utilise the :class:`Workflow` object.
 """
 
 import binascii
-from copy import deepcopy
 import json
 import logging
 import logging.handlers
@@ -43,14 +42,10 @@ import subprocess
 import sys
 import time
 import unicodedata
+from copy import deepcopy
 
 # imported to maintain API
-from .util import AcquisitionError  # noqa: F401
-from .util import (
-    atomic_writer,
-    LockFile,
-    uninterruptible,
-)
+from workflow.util import LockFile, atomic_writer, uninterruptible
 
 #: Sentinel for properties that haven't been set yet (that might
 #: correctly have the value ``None``)
@@ -1519,12 +1514,6 @@ class Workflow(object):
         ``~/Library/Application Support``. The full path for Alfred 4+ is:
 
         ``~/Library/Application Support/Alfred/Workflow Data/<bundle id>``
-
-        For earlier versions, the path is:
-
-        ``~/Library/Application Support/Alfred X/Workflow Data/<bundle id>``
-
-        where ``Alfred X` is ``Alfred 2`` or ``Alfred 3``.
 
         Returns:
             str: full path to workflow data directory
