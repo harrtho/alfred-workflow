@@ -1,3 +1,2 @@
 include workflow/version
-include workflow/Notify.tgz
 include README_PYPI.rst

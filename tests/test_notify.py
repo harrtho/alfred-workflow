@@ -18,22 +18,19 @@ import os
 import plistlib
 import shutil
 import stat
+import time
+from datetime import timedelta
 
 import pytest
+from workflow import Workflow, notify
 
-from workflow import notify
-from workflow import Workflow
+from tests.conftest import BUNDLE_ID, WORKFLOW_NAME
+from tests.util import FakePrograms, WorkflowMock
 
-from .conftest import BUNDLE_ID
-from .util import (
-    FakePrograms,
-    WorkflowMock,
-)
-
-DATADIR = os.path.expanduser(
-    '~/Library/Application Support/Alfred/'
+CACHEDIR = os.path.expanduser(
+    '~/Library/Caches/com.runningwithcrayons.Alfred/'
     'Workflow Data/' + BUNDLE_ID)
-APP_PATH = os.path.join(DATADIR, 'Notify.app')
+APP_PATH = os.path.join(CACHEDIR, f'Notificator for {WORKFLOW_NAME}.app')
 APPLET_PATH = os.path.join(APP_PATH, 'Contents/MacOS/applet')
 ICON_PATH = os.path.join(APP_PATH, 'Contents/Resources/applet.icns')
 INFO_PATH = os.path.join(APP_PATH, 'Contents/Info.plist')
@@ -69,26 +66,25 @@ def test_log_wf(infopl, alfred4):
 
 def test_paths(infopl, alfred4):
     """Module paths are correct"""
-    assert DATADIR == notify.wf().datadir, "unexpected datadir"
-    assert APPLET_PATH == notify.notifier_program(), "unexpected applet path"
-    assert ICON_PATH == notify.notifier_icon_path(), "unexpected icon path"
+    assert CACHEDIR == notify.wf().cachedir, "unexpected cachedir"
+    assert APPLET_PATH == notify.notificator_program(), "unexpected applet path"
+    assert ICON_PATH == notify.notificator_icon_path(), "unexpected icon path"
 
 
 def test_install(infopl, alfred4, applet):
-    """Notify.app is installed correctly"""
+    """Notificator.app is installed correctly"""
     assert os.path.exists(APP_PATH) is False, "APP_PATH exists"
-    notify.install_notifier()
+    notify.install_notificator()
     for p in (APP_PATH, APPLET_PATH, ICON_PATH, INFO_PATH):
         assert os.path.exists(p) is True, "path not found"
     # Ensure applet is executable
     assert (os.stat(APPLET_PATH).st_mode & stat.S_IXUSR), \
         "applet not executable"
-    # Verify bundle ID was changed
+    # Verify bundle ID was not changed
     with open(INFO_PATH, 'rb') as fp:
         data = plistlib.load(fp)
     bid = data.get('CFBundleIdentifier')
-    assert bid != BUNDLE_ID, "bundle IDs identical"
-    assert bid.startswith(BUNDLE_ID) is True, "bundle ID not prefix"
+    assert bid == BUNDLE_ID, "bundle IDs identical"
 
 
 def test_sound():
@@ -110,18 +106,43 @@ def test_invalid_notifications(infopl, alfred4):
         notify.notify()
     # Is not installed yet
     assert os.path.exists(APP_PATH) is False
-    assert notify.notify('Test Title', 'Test Message') is True
+    assert notify.notify(title='Test Title', message='Test Message') is True
     # A notification should appear now, but there's no way of
     # checking whether it worked
     assert os.path.exists(APP_PATH) is True
 
 
-def test_notifyapp_called(infopl, alfred4):
-    """Notify.app is called"""
+def test_notificatorapp_recreated(infopl, alfred4):
+    """Notificator.app older 30 days"""
+    # Create a Notificator.app
+    notify.install_notificator()
+    assert os.path.exists(APP_PATH) is True
+    curr = time.time()
+    mod = os.path.getmtime(APPLET_PATH)
+    diff = curr - mod
+    assert timedelta(seconds=diff).days == 0
+    # Date the Notificator.app back 31 days (86400 sec/day)
+    curr = time.time()
+    old = int(curr - 86400*31)
+    os.utime(APPLET_PATH, (old, old))
+    mod = os.path.getmtime(APPLET_PATH)
+    diff = curr - mod
+    assert timedelta(seconds=diff).days == 31
+    # Check if the Notificator.app has been updated
+    assert notify.notify(title='Test Title', message='Test Message') is True
+    assert os.path.exists(APP_PATH) is True
+    curr = time.time()
+    mod = os.path.getmtime(APPLET_PATH)
+    diff = curr - mod
+    assert timedelta(seconds=diff).days == 0
+
+
+def test_notificatorapp_called(infopl, alfred4):
+    """Notificator.app is called"""
     c = WorkflowMock()
-    notify.install_notifier()
+    notify.install_notificator()
     with c:
-        assert notify.notify('Test Title', 'Test Message') is False
+        assert notify.notify(title='Test Title', message='Test Message') is False
         assert c.cmd[0] == APPLET_PATH
 
 
@@ -144,7 +165,7 @@ def test_sips_fails(infopl, alfred4, tempdir):
 def test_image_conversion(infopl, alfred4, tempdir, applet):
     """PNG to ICNS conversion"""
     assert os.path.exists(APP_PATH) is False
-    notify.install_notifier()
+    notify.install_notificator()
     assert os.path.exists(APP_PATH) is True
     icns_path = os.path.join(tempdir, 'icon.icns')
     assert os.path.exists(icns_path) is False
