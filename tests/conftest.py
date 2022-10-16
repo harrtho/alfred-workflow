@@ -12,11 +12,12 @@
 """Common pytest fixtures."""
 
 import os
-from contextlib import contextmanager
 from shutil import rmtree
 from tempfile import mkdtemp
+from contextlib import contextmanager
 
 import pytest
+
 from workflow import Workflow
 
 from tests.util import INFO_PLIST_TEST, INFO_PLIST_TEST4, InfoPlist
@@ -37,10 +38,9 @@ ENV_V4 = dict(
     alfred_workflow_data=os.path.expanduser(
         '~/Library/Application Support/Alfred/'
         'Workflow Data/' + BUNDLE_ID),
-    #alfred_preferences=os.path.expanduser(
-    #    '~/Library/Application Support/Alfred/'
-    #    'Alfred.alfredpreferences'),
-    alfred_preferences=os.path.join(os.path.abspath(os.path.dirname(__file__)), 'data'),
+    alfred_preferences=os.path.expanduser(
+        '~/Library/Application Support/Alfred/'
+        'Alfred.alfredpreferences'),
 )
 
 COMMON = dict(

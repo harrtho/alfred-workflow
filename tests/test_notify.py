@@ -12,6 +12,7 @@
 """Unit tests for notifications."""
 
 
+import hashlib
 import logging
 import os
 import plistlib
@@ -19,17 +20,20 @@ import shutil
 import stat
 
 import pytest
-from workflow import Workflow, notify
 
-from tests.conftest import BUNDLE_ID, WORKFLOW_NAME
-from tests.util import WorkflowMock
+from workflow import notify
+from workflow import Workflow
 
-CACHEDIR = os.path.expanduser(
-    '~/Library/Caches/com.runningwithcrayons.Alfred'
-    '/Workflow Data/' + BUNDLE_ID)
-NOTIFICATOR_PATH = os.path.join(os.path.dirname(
-    os.path.dirname(__file__)), 'workflow/notificator.sh')
-APP_PATH = os.path.join(CACHEDIR, f'Notificator for {WORKFLOW_NAME}.app')
+from .conftest import BUNDLE_ID
+from .util import (
+    FakePrograms,
+    WorkflowMock,
+)
+
+DATADIR = os.path.expanduser(
+    '~/Library/Application Support/Alfred/'
+    'Workflow Data/' + BUNDLE_ID)
+APP_PATH = os.path.join(DATADIR, 'Notify.app')
 APPLET_PATH = os.path.join(APP_PATH, 'Contents/MacOS/applet')
 ICON_PATH = os.path.join(APP_PATH, 'Contents/Resources/applet.icns')
 INFO_PATH = os.path.join(APP_PATH, 'Contents/Info.plist')
@@ -39,7 +43,7 @@ PNG_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)),
                         'icon.png')
 
 
-@ pytest.fixture
+@pytest.fixture
 def applet():
     """Ensure applet doesn't exist."""
     if os.path.exists(APP_PATH):
@@ -65,17 +69,15 @@ def test_log_wf(infopl, alfred4):
 
 def test_paths(infopl, alfred4):
     """Module paths are correct"""
-    assert CACHEDIR == notify.wf().cachedir, "unexpected cachedir"
-    assert APPLET_PATH == notify.wf().cachefile(
-        f'Notificator for {WORKFLOW_NAME}.app/Contents/MacOS/applet'), "unexpected applet path"
-    assert ICON_PATH == notify.wf().cachefile(
-        f'Notificator for {WORKFLOW_NAME}.app/Contents/Resources/applet.icns'), "unexpected icon path"
+    assert DATADIR == notify.wf().datadir, "unexpected datadir"
+    assert APPLET_PATH == notify.notifier_program(), "unexpected applet path"
+    assert ICON_PATH == notify.notifier_icon_path(), "unexpected icon path"
 
 
 def test_install(infopl, alfred4, applet):
     """Notify.app is installed correctly"""
     assert os.path.exists(APP_PATH) is False, "APP_PATH exists"
-    notify.notify('Test Title', 'Test Message')
+    notify.install_notifier()
     for p in (APP_PATH, APPLET_PATH, ICON_PATH, INFO_PATH):
         assert os.path.exists(p) is True, "path not found"
     # Ensure applet is executable
@@ -117,18 +119,42 @@ def test_invalid_notifications(infopl, alfred4):
 def test_notifyapp_called(infopl, alfred4):
     """Notify.app is called"""
     c = WorkflowMock()
+    notify.install_notifier()
     with c:
         assert notify.notify('Test Title', 'Test Message') is False
-        assert c.cmd[0] == NOTIFICATOR_PATH
+        assert c.cmd[0] == APPLET_PATH
 
 
-def test_image_conversion(infopl, alfred4, applet):
+def test_iconutil_fails(infopl, alfred4, tempdir):
+    """`iconutil` throws RuntimeError"""
+    with FakePrograms('iconutil'):
+        icns_path = os.path.join(tempdir, 'icon.icns')
+        with pytest.raises(RuntimeError):
+            notify.png_to_icns(PNG_PATH, icns_path)
+
+
+def test_sips_fails(infopl, alfred4, tempdir):
+    """`sips` throws RuntimeError"""
+    with FakePrograms('sips'):
+        icon_path = os.path.join(tempdir, 'icon.png')
+        with pytest.raises(RuntimeError):
+            notify.convert_image(PNG_PATH, icon_path, 64)
+
+
+def test_image_conversion(infopl, alfred4, tempdir, applet):
     """PNG to ICNS conversion"""
     assert os.path.exists(APP_PATH) is False
-    assert os.path.exists(ICON_PATH) is False
-    notify.notify('Test Title', 'Test Message')
+    notify.install_notifier()
     assert os.path.exists(APP_PATH) is True
-    assert os.path.exists(ICON_PATH) is True
+    icns_path = os.path.join(tempdir, 'icon.icns')
+    assert os.path.exists(icns_path) is False
+    notify.png_to_icns(PNG_PATH, icns_path)
+    assert os.path.exists(icns_path) is True
+    with open(icns_path, 'rb') as fp:
+        h1 = hashlib.md5(fp.read())
+    with open(ICON_PATH, 'rb') as fp:
+        h2 = hashlib.md5(fp.read())
+    assert h1.digest() == h2.digest()
 
 
 if __name__ == '__main__':  # pragma: no cover
