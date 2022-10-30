@@ -67,7 +67,7 @@ def test_run_fails_with_json_output(wf):
 
     assert ret == 1
     assert error_text in output
-    assert type(json.loads(output)) == type(dict())
+    assert isinstance(json.loads(output), dict)
 
 
 def test_run_fails_with_plain_text_output(wf):

@@ -55,7 +55,7 @@ def test_item_creation(wf):
     feedback_item = feedback['items'][0]
     assert feedback_item['uid'] == 'uid'
     assert feedback_item['autocomplete'] == 'autocomplete'
-    assert feedback_item['valid'] == True
+    assert feedback_item['valid'] is True
     assert feedback_item['uid'] == 'uid'
     assert feedback_item['title'] == 'title'
     assert feedback_item['subtitle'] == 'subtitle'
@@ -86,7 +86,7 @@ def test_item_creation_with_modifiers(wf):
     feedback_item = feedback['items'][0]
     assert feedback_item['uid'] == 'uid'
     assert feedback_item['autocomplete'] == 'autocomplete'
-    assert feedback_item['valid'] == True
+    assert feedback_item['valid'] is True
     assert feedback_item['uid'] == 'uid'
     assert feedback_item['title'] == 'title'
     assert feedback_item['subtitle'] == 'subtitle'
@@ -114,7 +114,7 @@ def test_item_creation_no_optionals(wf):
     for key in ['uid', 'arg', 'autocomplete', 'icon']:
         assert key not in feedback_item.keys()
 
-    assert feedback_item['valid'] == False
+    assert feedback_item['valid'] is False
     assert feedback_item['title'] == 'title'
     assert feedback_item['subtitle'] == ''
 
