@@ -22,8 +22,8 @@ from workflow import Workflow
 
 from tests.util import INFO_PLIST_TEST, INFO_PLIST_TEST4, InfoPlist
 
-BUNDLE_ID = 'de.xdevcloud.alfred-workflow'
-WORKFLOW_NAME = 'Alfred-Workflow Test'
+BUNDLE_ID = 'de.xdevcloud.alfred-pyworkflow'
+WORKFLOW_NAME = 'Alfred-PyWorkflow Test'
 WORKFLOW_VERSION = '2.0.0'
 
 ENV_V4 = dict(

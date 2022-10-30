@@ -27,8 +27,8 @@ import zlib
 
 __version__ = open(os.path.join(os.path.dirname(__file__), 'version')).read()
 
-USER_AGENT = ('Alfred-Workflow/' + __version__ +
-              ' (+http://www.deanishe.net/alfred-workflow)')
+USER_AGENT = ('Alfred-PyWorkflow/' + __version__ +
+              ' (+https://xdevcloud.de/alfred-pyworkflow)')
 
 # Valid characters for multipart form data boundaries
 BOUNDARY_CHARS = string.digits + string.ascii_letters

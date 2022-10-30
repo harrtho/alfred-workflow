@@ -60,11 +60,11 @@ from .workflow import (
 )
 
 
-__title__ = 'Alfred-Workflow'
+__title__ = 'Alfred-PyWorkflow'
 __version__ = open(os.path.join(os.path.dirname(__file__), 'version')).read()
-__author__ = 'Dean Jackson'
+__author__ = 'Thomas Harr, Dean Jackson'
 __licence__ = 'MIT'
-__copyright__ = 'Copyright 2014-2019 Dean Jackson'
+__copyright__ = 'Copyright 2022 Thomas Harr, Copyright 2014-2019 Dean Jackson'
 
 __all__ = [
     'Variables',

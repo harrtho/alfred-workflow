@@ -67,7 +67,7 @@ def test_version_magic(infopl4):
 
 def test_openhelp(infopl):
     """Magic: open help URL"""
-    url = 'http://www.deanishe.net/alfred-workflow/'
+    url = 'https://xdevcloud.de/alfred-pyworkflow/'
     with WorkflowMock(['script', 'workflow:help']) as c:
         wf = Workflow(help_url=url)
         # Process magic arguments

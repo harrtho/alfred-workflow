@@ -1,6 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 #
+# Copyright (c) 2022 Thomas Harr <xDevThomas@gmail.com>
 # Copyright (c) 2014 Dean Jackson <deanishe@deanishe.net>
 #
 # MIT Licence. See http://opensource.org/licenses/MIT
@@ -8,7 +9,7 @@
 # Created on 2014-08-17
 #
 
-"""Alfred-Workflow library for building Alfred 3/4 workflows."""
+"""Alfred-PyWorkflow library for building Alfred 4 and 5 workflows."""
 
 import os
 from os.path import dirname, join
@@ -40,21 +41,24 @@ class PyTestCommand(TestCommand):
 version = read('workflow/version')
 long_description = read('README_PYPI.rst')
 
-name = 'Alfred-Workflow'
-author = 'Dean Jackson'
-author_email = 'deanishe@deanishe.net'
-url = 'http://www.deanishe.net/alfred-workflow/'
-description = 'Full-featured helper library for writing Alfred 2/3/4 workflows'
-keywords = 'alfred workflow alfred4'
+name = 'Alfred-PyWorkflow'
+author = 'Thomas Harr'
+author_email = 'xDevThomas@gmail.com'
+url = 'https://xdevcloud.de/alfred-pyworkflow/'
+description = 'Full-featured helper library for writing Alfred 4 and 5 workflows'
+keywords = 'alfred workflow alfred4 alfred5'
 packages = ['workflow']
-package_data = {'workflow': ['version', 'Notify.tgz']}
+package_data = {'workflow': ['version']}
 classifiers = [
     'Development Status :: 5 - Production/Stable',
     'License :: OSI Approved :: MIT License',
     'Operating System :: MacOS :: MacOS X',
     'Intended Audience :: Developers',
     'Natural Language :: English',
-    'Programming Language :: Python :: 2.7',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
     'Topic :: Software Development :: Libraries',
     'Topic :: Software Development :: Libraries :: Application Frameworks',
 ]
@@ -62,7 +66,6 @@ tests_require = [
     'coverage',
     'pytest',
     'pytest_cov',
-    'pytest_httpbin',
     'pytest_localserver',
 ]
 zip_safe = False

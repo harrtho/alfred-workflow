@@ -188,7 +188,7 @@ def test_run_trigger(alfred4):
     script = (
         'Application("com.runningwithcrayons.Alfred")'
         '.runTrigger("test", '
-        '{"inWorkflow": "de.xdevcloud.alfred-workflow"});'
+        '{"inWorkflow": "de.xdevcloud.alfred-pyworkflow"});'
     )
     cmd = ['/usr/bin/osascript', '-l', 'JavaScript', '-e', script]
     with MockCall() as m:
@@ -235,7 +235,7 @@ def test_set_config(alfred4):
         'Application("com.runningwithcrayons.Alfred")'
         '.setConfiguration("test", '
         '{"exportable": false, '
-        '"inWorkflow": "de.xdevcloud.alfred-workflow", '
+        '"inWorkflow": "de.xdevcloud.alfred-pyworkflow", '
         '"toValue": "test"});'
     )
     cmd = ['/usr/bin/osascript', '-l', 'JavaScript', '-e', script]
@@ -337,7 +337,7 @@ def test_reload_workflow(alfred4):
     # With bundle ID from env
     script = (
         'Application("com.runningwithcrayons.Alfred")'
-        '.reloadWorkflow("de.xdevcloud.alfred-workflow");'
+        '.reloadWorkflow("de.xdevcloud.alfred-pyworkflow");'
     )
     cmd = ['/usr/bin/osascript', '-l', 'JavaScript', '-e', script]
     with MockCall() as m:

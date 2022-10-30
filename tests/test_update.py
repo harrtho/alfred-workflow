@@ -58,14 +58,14 @@ HTTP_HEADERS_JSON = {
     'Content-Type': 'application/json; charset=utf-8',
 }
 
-# This repo was created especially to test Alfred-Workflow
+# This repo was created especially to test Alfred-PyWorkflow
 # It contains multiple releases, some valid, some invalid
 # The .alfredworkflow files in the releases are working demos.
 #
 # The repo has since been mirrored to the `tests/data` directory
 # (see DATA_* variables above), so the tests can run offline.
-TEST_REPO = 'deanishe/alfred-workflow-dummy'
-EMPTY_REPO = 'deanishe/alfred-workflow-empty-dummy'
+TEST_REPO = 'harrtho/alfred-pyworkflow-dummy'
+EMPTY_REPO = 'harrtho/alfred-pyworkflow-empty-dummy'
 GH_ROOT = 'https://github.com/' + TEST_REPO
 GH_API_ROOT = 'https://api.github.com/repos/' + TEST_REPO
 RELEASES_URL = GH_API_ROOT + '/releases'
@@ -108,7 +108,7 @@ def test_parse_releases(infopl, alfred4):
 
 def test_compare_downloads():
     """Compare Downloads"""
-    dl = Download("https://github.com/deanishe/alfred-workflow-dummy/releases/download/v11/Dummy-11.0.alfredworkflow",  # noqa: E501
+    dl = Download("https://github.com/harrtho/alfred-pyworkflow-dummy/releases/download/v11/Dummy-11.0.alfredworkflow",  # noqa: E501
                   "Dummy-11.0.alfredworkflow",
                   "v11",
                   False)
@@ -133,7 +133,7 @@ def test_valid_api_url(infopl, alfred4):
 def test_invalid_api_url(infopl, alfred4):
     """API URL for invalid slug"""
     with pytest.raises(ValueError):
-        update.build_api_url('fniephausalfred-workflow')
+        update.build_api_url('fniephausalfred-pyworkflow')
 
 
 def test_empty_repo(httpserver, infopl):
@@ -315,38 +315,38 @@ def test_update_nondefault_serialiser(httpserver, infopl, alfred4):
 
 VALID_DOWNLOADS = [
     # Latest version for Alfred 4
-    Download("https://github.com/deanishe/alfred-workflow-dummy/releases/download/v10.0-beta/Dummy-10.0-beta.alfredworkflow",  # noqa: E501
+    Download("https://github.com/harrtho/alfred-pyworkflow-dummy/releases/download/v10.0-beta/Dummy-10.0-beta.alfredworkflow",  # noqa: E501
              "Dummy-10.0-beta.alfredworkflow",
              "v10.0-beta",
              True),
     # Latest stable version for Alfred 4
-    Download("https://github.com/deanishe/alfred-workflow-dummy/releases/download/v9.0/Dummy-9.0.alfred4workflow",  # noqa: E501
+    Download("https://github.com/harrtho/alfred-pyworkflow-dummy/releases/download/v9.0/Dummy-9.0.alfred4workflow",  # noqa: E501
              "Dummy-9.0.alfred4workflow",
              "v9.0",
              False),
     # Latest version for Alfred 3
-    Download("https://github.com/deanishe/alfred-workflow-dummy/releases/download/v7.1.0-beta/Dummy-7.1-beta.alfredworkflow",  # noqa: E501
+    Download("https://github.com/harrtho/alfred-pyworkflow-dummy/releases/download/v7.1.0-beta/Dummy-7.1-beta.alfredworkflow",  # noqa: E501
              "Dummy-7.1-beta.alfredworkflow",
              "v7.1.0-beta",
              True),
     # Latest stable version for Alfred 3
-    Download("https://github.com/deanishe/alfred-workflow-dummy/releases/download/v6.0/Dummy-6.0.alfred4workflow",  # noqa: E501
+    Download("https://github.com/harrtho/alfred-pyworkflow-dummy/releases/download/v6.0/Dummy-6.0.alfred4workflow",  # noqa: E501
              "Dummy-6.0.alfred4workflow",
              "v6.0",
              False),
-    Download("https://github.com/deanishe/alfred-workflow-dummy/releases/download/v6.0/Dummy-6.0.alfred3workflow",  # noqa: E501
+    Download("https://github.com/harrtho/alfred-pyworkflow-dummy/releases/download/v6.0/Dummy-6.0.alfred3workflow",  # noqa: E501
              "Dummy-6.0.alfred3workflow",
              "v6.0",
              False),
-    Download("https://github.com/deanishe/alfred-workflow-dummy/releases/download/v6.0/Dummy-6.0.alfredworkflow",  # noqa: E501
+    Download("https://github.com/harrtho/alfred-pyworkflow-dummy/releases/download/v6.0/Dummy-6.0.alfredworkflow",  # noqa: E501
              "Dummy-6.0.alfredworkflow",
              "v6.0",
              False),
-    Download("https://github.com/deanishe/alfred-workflow-dummy/releases/download/v2.0/Dummy-2.0.alfredworkflow",  # noqa: E501
+    Download("https://github.com/harrtho/alfred-pyworkflow-dummy/releases/download/v2.0/Dummy-2.0.alfredworkflow",  # noqa: E501
              "Dummy-2.0.alfredworkflow",
              "v2.0",
              False),
-    Download("https://github.com/deanishe/alfred-workflow-dummy/releases/download/v1.0/Dummy-1.0.alfredworkflow",  # noqa: E501
+    Download("https://github.com/harrtho/alfred-pyworkflow-dummy/releases/download/v1.0/Dummy-1.0.alfredworkflow",  # noqa: E501
              "Dummy-1.0.alfredworkflow",
              "v1.0",
              False),

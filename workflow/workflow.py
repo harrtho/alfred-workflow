@@ -645,12 +645,12 @@ class Variables(dict):
         arg (str or list, optional): Main output/``{query}``.
         **variables: Workflow variables to set.
 
-    In Alfred 4.1+ and Alfred-Workflow 1.40+, ``arg`` may also be a
+    In Alfred 4.1+ and Alfred-PyWorkflow 1.40+, ``arg`` may also be a
     :class:`list` or :class:`tuple`.
 
     Attributes:
         arg (str or list): Output value (``{query}``).
-            In Alfred 4.1+ and Alfred-Workflow 1.40+, ``arg`` may also be a
+            In Alfred 4.1+ and Alfred-PyWorkflow 1.40+, ``arg`` may also be a
             :class:`list` or :class:`tuple`.
         config (dict): Configuration for downstream workflow element.
 
@@ -924,7 +924,7 @@ class Item(object):
                 :meth:`Workflow.add_item() <workflow.Workflow.add_item>`
                 for valid values.
 
-        In Alfred 4.1+ and Alfred-Workflow 1.40+, ``arg`` may also be a
+        In Alfred 4.1+ and Alfred-PyWorkflow 1.40+, ``arg`` may also be a
         :class:`list` or :class:`tuple`.
 
         Returns:
@@ -1132,7 +1132,7 @@ class Settings(dict):
 
 
 class Workflow(object):
-    """The ``Workflow`` object is the main interface to Alfred-Workflow.
+    """The ``Workflow`` object is the main interface to Alfred-PyWorkflow.
 
     It provides APIs for accessing the Alfred/workflow environment,
     storing & caching data, using Keychain, and generating Script
@@ -1397,7 +1397,7 @@ class Workflow(object):
         exists or :class:`ValueError` if the version number is invalid
         (i.e. not semantic).
 
-        :returns: Version of the workflow (not Alfred-Workflow)
+        :returns: Version of the workflow (not Alfred-PyWorkflow)
         :rtype: :class:`~workflow.update.Version` object
 
         """
@@ -1972,7 +1972,7 @@ class Workflow(object):
             raise ValueError(
                 'Cannot save data to' +
                 '`{0}` with format `{1}`. '.format(name, serializer_name) +
-                "This would overwrite Alfred-Workflow's settings file.")
+                "This would overwrite Alfred-PyWorkflow's settings file.")
 
         serializer = manager.serializer(serializer_name)
 
@@ -2457,7 +2457,7 @@ class Workflow(object):
             instance) as first argument.
         :param text_errors: Emit error messages in plain text, not in
             Alfred's XML/JSON feedback format. Use this when you're not
-            running Alfred-Workflow in a Script Filter and would like
+            running Alfred-PyWorkflow in a Script Filter and would like
             to pass the error message to, say, a notification.
         :type text_errors: ``Boolean``
 

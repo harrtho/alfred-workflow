@@ -31,7 +31,7 @@ from .test_update import fakeresponse, RELEASES_JSON, HTTP_HEADERS_JSON
 
 
 UPDATE_SETTINGS = {
-    'github_slug': 'deanishe/alfred-workflow-dummy',
+    'github_slug': 'harrtho/alfred-pyworkflow-dummy',
     'version': 'v2.0',
     'frequency': 1,
 }

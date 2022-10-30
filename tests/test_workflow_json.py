@@ -47,7 +47,7 @@ def test_item_creation(wf):
         icontype='fileicon',
         type='file', largetext='largetext',
         copytext='copytext',
-        quicklookurl='http://www.deanishe.net/alfred-workflow')
+        quicklookurl='https://xdevcloud.de/alfred-pyworkflow')
     with stdout() as sio:
         wf.send_feedback()
         output = sio.getvalue()
@@ -61,7 +61,7 @@ def test_item_creation(wf):
     assert feedback_item['title'] == 'title'
     assert feedback_item['subtitle'] == 'subtitle'
     assert feedback_item['arg'] == 'arg'
-    assert feedback_item['quicklookurl'] == 'http://www.deanishe.net/alfred-workflow'
+    assert feedback_item['quicklookurl'] == 'https://xdevcloud.de/alfred-pyworkflow'
     feedback_text = feedback_item['text']
     assert feedback_text['largetype'] == 'largetext'
     assert feedback_text['copy'] == 'copytext'

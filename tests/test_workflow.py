@@ -144,7 +144,7 @@ def test_optional(infopl):
                      match='match',
                      largetext='large',
                      copytext='copy',
-                     quicklookurl='http://www.deanishe.net/alfred-workflow',
+                     quicklookurl='https://xdevcloud.de/alfred-pyworkflow',
                      type='file',
                      icon='icon.png')
 
@@ -157,7 +157,7 @@ def test_optional(infopl):
     assert o['text']['copy'] == 'copy'
     assert o['text']['largetype'] == 'large'
     assert o['icon']['path'] == 'icon.png'
-    assert o['quicklookurl'] == 'http://www.deanishe.net/alfred-workflow'
+    assert o['quicklookurl'] == 'https://xdevcloud.de/alfred-pyworkflow'
     assert o['type'] == 'file'
 
 
@@ -302,7 +302,7 @@ def _test_persistent_variables(appname):
             'Application("' + appname + '")'
             '.setConfiguration("testvar", '
             '{"exportable": false, '
-            '"inWorkflow": "de.xdevcloud.alfred-workflow", '
+            '"inWorkflow": "de.xdevcloud.alfred-pyworkflow", '
             '"toValue": "testval"});'
         )
 

@@ -29,7 +29,7 @@ def test_run_fails(infopl):
         assert wf2 is wf
         raise ValueError('Have an error')
 
-    wf.help_url = 'http://www.deanishe.net/alfred-workflow/'
+    wf.help_url = 'https://xdevcloud.de/alfred-pyworkflow/'
     ret = wf.run(cb)
     assert ret == 1
 

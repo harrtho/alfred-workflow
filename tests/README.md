@@ -2,7 +2,7 @@
 Test suite
 ==========
 
-Unit tests and data for Alfred-Workflow. Currently an unholy mix of `unittest` and `py.test` (moving towards the latter).
+Unit tests and data for Alfred-PyWorkflow. Currently an unholy mix of `unittest` and `py.test` (moving towards the latter).
 
 
 Running the full suite with coverage

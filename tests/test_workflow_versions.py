@@ -46,7 +46,7 @@ def test_versions_from_settings(alfred4, infopl4):
     """Workflow: version from `update_settings`"""
     vstr = '1.9.7'
     d = {
-        'github_slug': 'harrtho/alfred-workflow',
+        'github_slug': 'harrtho/alfred-pyworkflow',
         'version': vstr,
     }
     with env(alfred_workflow_version=None):

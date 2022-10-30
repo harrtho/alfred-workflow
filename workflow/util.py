@@ -575,7 +575,7 @@ class uninterruptible(object):
     the SIGTERM will be caught and handled after your function has
     finished executing.
 
-    Alfred-Workflow uses this internally to ensure its settings, data
+    Alfred-PyWorkflow uses this internally to ensure its settings, data
     and cache writes complete.
 
     """

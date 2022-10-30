@@ -35,7 +35,7 @@ APPLET_PATH = os.path.join(APP_PATH, 'Contents/MacOS/applet')
 ICON_PATH = os.path.join(APP_PATH, 'Contents/Resources/applet.icns')
 INFO_PATH = os.path.join(APP_PATH, 'Contents/Info.plist')
 
-# Alfred-Workflow icon (present in source distribution)
+# Alfred-PyWorkflow icon (present in source distribution)
 PNG_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)),
                         'icon.png')
 

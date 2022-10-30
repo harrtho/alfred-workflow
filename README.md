@@ -1,9 +1,9 @@
 
 <div align="center">
-  <img src="./icon.png" alt="Alfred-Workflow logo" height="200">
+  <img src="./icon.png" alt="Alfred-PyWorkflow logo" height="200">
 </div>
 
-Alfred-Workflow
+Alfred-PyWorkflow
 ===============
 
 A helper library in Python for authors of workflows for [Alfred 4 and 5][alfred].
@@ -16,10 +16,12 @@ A helper library in Python for authors of workflows for [Alfred 4 and 5][alfred]
 [![Supported Python Versions][shield-pyversions]][pypi]
 
 <!-- [![Downloads][shield-download]][pypi] -->
+Supports Alfred 4 and Alfred 5 on macOS Catalina or later with Python 3.7+.
 
-Supports Alfred 4 and Alfred 5 on macOS Catalina or later (Python 3.7).
+Alfred-PyWorkflow is a Python 3 port of the original [Alfred-Workflow][alfred-workflow].
 
-Alfred-Workflow takes the grunt work out of writing a workflow by giving you the tools to create a fast and featureful Alfred workflow from an API, application or library in minutes.
+Alfred-PyWorkflow takes the grunt work out of writing a workflow by giving you the tools to create
+a fast and featureful Alfred workflow from an API, application or library in minutes.
 
 Always supports all current Alfred features.
 
@@ -68,7 +70,7 @@ Contents
   - [Adding a workflow to the list](#adding-a-workflow-to-the-list)
   - [Bug reports, pull requests](#bug-reports-pull-requests)
   - [Contributors](#contributors)
-- [Workflows using Alfred-Workflow](#workflows-using-alfred-workflow)
+- [Workflows using Alfred-PyWorkflow](#workflows-using-alfred-pyworkflow)
 
 <!-- /MarkdownTOC -->
 
@@ -84,11 +86,11 @@ Installation
 <a name="with-pip"></a>
 ### With pip ###
 
-You can install Alfred-Workflow directly into your workflow with:
+You can install Alfred-PyWorkflow directly into your workflow with:
 
-```bash
+```zsh
 # from your workflow directory
-pip install --target=. Alfred-Workflow
+pip install --target=. Alfred-PyWorkflow
 ```
 
 You can install any other library available on the [Cheese Shop][cheeseshop] the same way. See the [pip documentation][pip-docs] for more information.
@@ -99,8 +101,9 @@ It is highly advisable to bundle all your workflow's dependencies with your work
 <a name="from-source"></a>
 ### From source ###
 
-1. Download the `alfred-workflow-X.X.X.zip` from the [GitHub releases page][releases].
-2. Extract the ZIP archive and place the `workflow` directory in the root folder of your workflow (where `info.plist` is).
+1. Download the `alfred-pyworkflow-X.X.X.zip` from the [GitHub releases page][releases].
+2. Extract the ZIP archive and place the `workflow` directory in the root folder of your workflow
+(where `info.plist` is).
 
 Your workflow should look something like this:
 
@@ -119,14 +122,15 @@ Your workflow should look something like this:
         yourscript.py
         etc.
 
-Alternatively, you can clone/download the Alfred-Workflow [repository][repo] and copy the `workflow` subdirectory to your workflow's root directory.
+Alternatively, you can clone/download the Alfred-PyWorkflow [GitHub repository][repo] and copy the
+`workflow` subdirectory to your workflow's root directory.
 
 
 <a name="usage"></a>
 Usage
 -----
 
-A few examples of how to use Alfred-Workflow.
+A few examples of how to use Alfred-PyWorkflow.
 
 
 <a name="workflow-script-skeleton"></a>
@@ -251,7 +255,7 @@ wf.get_password('name of account')
 Documentation
 -------------
 
-The full documentation, including API docs and a tutorial, can be found at [deanishe.net][docs].
+The full documentation, including API docs and a tutorial, can be found at [xdevcloud.de][docs].
 
 
 <a name="dash-docset"></a>
@@ -268,7 +272,7 @@ The code and the documentation are released under the MIT and [Creative Commons 
 
 The documentation was generated using [Sphinx][sphinx] and a modified version of the [Alabaster][alabaster] theme by [bitprophet][bitprophet].
 
-Many of the cooler ideas in Alfred-Workflow were inspired by [Alfred2-Ruby-Template][ruby-template] by Zhaocai.
+Many of the cooler ideas in Alfred-PyWorkflow were inspired by [Alfred2-Ruby-Template][ruby-template] by Zhaocai.
 
 The Keychain parser was based on [Python-Keyring][python-keyring] by Jason R. Coombs.
 
@@ -281,7 +285,7 @@ Contributing
 <a name="adding-a-workflow-to-the-list"></a>
 ### Adding a workflow to the list ###
 
-If you want to add a workflow to the [list of workflows using Alfred-Workflow][docs-workflows], **don't add it to the docs!** The list is machine-generated from [Packal.org][packal] and the [`library_workflows.tsv`](extras/library_workflows.tsv) file. If your workflow is available on [Packal][packal], it will be added on the next update. If not, please add it to [`library_workflows.tsv`](extras/library_workflows.tsv), and submit a corresponding pull request.
+If you want to add a workflow to the [list of workflows using Alfred-PyWorkflow][docs-workflows], **don't add it to the docs!** The list is machine-generated from the [`library_workflows.tsv`](extras/library_workflows.tsv) file. Please add it to [`library_workflows.tsv`](extras/library_workflows.tsv), and submit a corresponding pull request.
 
 The list is not auto-updated, so if you've released a workflow and are keen to see it in this list, please [open an issue][issues] asking me to update the list.
 
@@ -295,59 +299,54 @@ Please see [the documentation][docs-contributing].
 <a name="contributors"></a>
 ### Contributors ###
 
+- [Thomas Harr][harrtho]
 - [Dean Jackson][deanishe]
 - [Stephen Margheim][smargh]
 - [Fabio Niephaus][fniephaus]
 - [Owen Min][owenwater]
 
 
-<a name="workflows-using-alfred-workflow"></a>
-Workflows using Alfred-Workflow
+<a name="workflows-using-alfred-pyworkflow"></a>
+Workflows using Alfred-PyWorkflow
 -------------------------------
 
-[Here is a list][docs-workflows] of some of the many workflows based on Alfred-Workflow.
+[Here is a list][docs-workflows] of some of the many workflows based on Alfred-PyWorkflow.
 
 
 [alfred]: http://www.alfredapp.com/
-[awv2]: https://github.com/deanishe/alfred-workflow/tree/v2
 [alabaster]: https://github.com/bitprophet/alabaster
+[alfred-workflow]: https://github.com/deanishe/alfred-workflow
 [bitprophet]: https://github.com/bitprophet
 [cc]: https://creativecommons.org/licenses/by-nc/4.0/legalcode
-[coveralls]: https://coveralls.io/r/deanishe/alfred-workflow?branch=master
+[coveralls]: https://coveralls.io/r/harrtho/alfred-pyworkflow?branch=main
 [deanishe]: https://github.com/deanishe
-[docs-contributing]: http://www.deanishe.net/alfred-workflow/contributing.html
-[docs-tutorial]: http://www.deanishe.net/alfred-workflow/tutorial.html
-[docs-api]: http://www.deanishe.net/alfred-workflow/api/
-[docs]: http://www.deanishe.net/alfred-workflow/
-[docs-workflows]: http://www.deanishe.net/alfred-workflow/aw-workflows.html
-[dash]: https://github.com/deanishe/alfred-workflow/raw/master/docs/Alfred-Workflow.docset.zip
+[docs-contributing]: https://xdevcloud.de/alfred-pyworkflow/contributing.html
+[docs-tutorial]: https://xdevcloud.de/alfred-pyworkflow/tutorial.html
+[docs]: https://xdevcloud.de/alfred-pyworkflow/
+[docs-workflows]: https://xdevcloud.de/alfred-pyworkflow/aw-workflows.html
+[dash]: https://github.com/harrtho/alfred-pyworkflow/raw/main/docs/Alfred-PyWorkflow.docset.zip
 [fniephaus]: https://github.com/fniephaus
+[harrtho]: https://github.com/harrtho
+[issues]: https://github.com/harrtho/alfred-pyworkflow/issues
 [owenwater]: https://github.com/owenwater
-[issues]: https://github.com/deanishe/alfred-workflow/issues
-[landscape]: https://landscape.io/github/deanishe/alfred-workflow/master
 [packal]: http://www.packal.org/
 [pep8]: http://legacy.python.org/dev/peps/pep-0008/
-[pulls]: https://github.com/deanishe/alfred-workflow/pulls
-[pypi]: https://pypi.python.org/pypi/Alfred-Workflow/
-[releases]: https://github.com/deanishe/alfred-workflow/releases
-[repo]: https://github.com/deanishe/alfred-workflow
+[pypi]: https://pypi.python.org/pypi/Alfred-PyWorkflow/
+[releases]: https://github.com/harrtho/alfred-pyworkflow/releases
+[repo]: https://github.com/harrtho/alfred-pyworkflow
 [requests]: http://docs.python-requests.org/en/latest/
 [rtd]: https://readthedocs.org/
-[shield-coveralls]: https://coveralls.io/repos/github/deanishe/alfred-workflow/badge.svg?branch=master
-[shield-docs]: https://readthedocs.org/projects/alfredworkflow/badge/?version=latest&style=flat
-[shield-download]: https://img.shields.io/pypi/dm/Alfred-Workflow.svg?style=flat
-[shield-github]: https://github.com/deanishe/alfred-workflow/workflows/CI/badge.svg
-[action-github]: https://github.com/deanishe/alfred-workflow/actions?query=workflow%3ACI
-[shield-health]: https://landscape.io/github/deanishe/alfred-workflow/master/landscape.png?style=flat
-[shield-licence]: https://pypip.in/license/Alfred-Workflow/badge.svg?style=flat
-[shield-status]: https://img.shields.io/pypi/status/Alfred-Workflow.svg?style=flat
-[shield-travis]: https://travis-ci.org/deanishe/alfred-workflow.svg?branch=master&style=flat
-[shield-version]: https://img.shields.io/pypi/v/Alfred-Workflow.svg?style=flat
-[shield-pyversions]: https://img.shields.io/pypi/pyversions/Alfred-Workflow.svg?style=flat
+[shield-coveralls]: https://coveralls.io/repos/github/harrtho/alfred-pyworkflow/badge.svg?branch=main
+[shield-download]: https://img.shields.io/pypi/dm/Alfred-PyWorkflow.svg?style=flat
+[shield-github]: https://github.com/harrtho/alfred-pyworkflow/workflows/CI/badge.svg
+[action-github]: https://github.com/harrtho/alfred-pyworkflow/actions?query=workflow%3ACI
+[shield-status]: https://img.shields.io/pypi/status/Alfred-PyWorkflow.svg?style=flat
+[shield-version]: https://img.shields.io/pypi/v/Alfred-PyWorkflow.svg?style=flat
+[shield-pyversions]: https://img.shields.io/pypi/pyversions/Alfred-PyWorkflow.svg?style=flat
 [smargh]: https://github.com/smargh
 [sphinx]: http://sphinx-doc.org/
-[travis]: https://travis-ci.org/deanishe/alfred-workflow
 [cheeseshop]: https://pypi.python.org/pypi
 [pip-docs]: https://pip.pypa.io/en/latest/
 [ruby-template]: http://zhaocai.github.io/alfred2-ruby-template/
 [python-keyring]: https://pypi.python.org/pypi/keyring
+[workflow-variables]: https://xdevcloud.de/alfred-pyworkflow/guide/variables.html#workflow-variables

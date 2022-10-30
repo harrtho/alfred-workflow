@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>de.xdevcloud.alfred-workflow</string>
+	<string>de.xdevcloud.alfred-pyworkflow</string>
 	<key>connections</key>
 	<dict/>
 	<key>createdby</key>
@@ -13,7 +13,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Alfred-Workflow Test</string>
+	<string>Alfred-PyWorkflow Test</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -50,9 +50,9 @@
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Test alfred-workflow Python lib</string>
+				<string>Test alfred-pyworkflow Python lib</string>
 				<key>title</key>
-				<string>Alfred-Workflow Test</string>
+				<string>Alfred-PyWorkflow Test</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -83,6 +83,6 @@
 	<key>version</key>
 	<string>2.0</string>
 	<key>webaddress</key>
-	<string>https://github.com/harrtho/alfred-workflow</string>
+	<string>https://github.com/harrtho/alfred-pyworkflow</string>
 </dict>
 </plist>
