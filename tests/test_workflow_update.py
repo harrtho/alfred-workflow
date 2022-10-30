@@ -91,7 +91,7 @@ def test_check_update(httpserver, alfred4):
         with ctx() as (wf, c):
             wf.run(update)
             assert c.cmd == [
-                '/usr/bin/python3', '-m', 'workflow.background',
+                '/usr/bin/env', 'python3', '-m', 'workflow.background',
                 '__workflow_update_check'
             ]
 
@@ -100,7 +100,7 @@ def test_check_update(httpserver, alfred4):
         with ctx(update_settings=update_settings) as (wf, c):
             wf.run(update)
             assert c.cmd == [
-                '/usr/bin/python3', '-m', 'workflow.background',
+                '/usr/bin/env', 'python3', '-m', 'workflow.background',
                 '__workflow_update_check'
             ]
 
@@ -120,7 +120,7 @@ def test_install_update(httpserver, alfred4):
             print('Magic update command : {0!r}'.format(c.cmd))
 
             assert c.cmd == [
-                '/usr/bin/python3', '-m', 'workflow.background',
+                '/usr/bin/env', 'python3', '-m', 'workflow.background',
                 '__workflow_update_install'
             ]
 
@@ -170,7 +170,7 @@ def test_install_update_prereleases(httpserver, alfred4):
             print('Magic update command : {!r}'.format(c.cmd))
 
             assert c.cmd == [
-                '/usr/bin/python3', '-m', 'workflow.background',
+                '/usr/bin/env', 'python3', '-m', 'workflow.background',
                 '__workflow_update_install'
             ]
 
