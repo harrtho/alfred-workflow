@@ -15,10 +15,9 @@ import os
 import time
 
 import pytest
+from workflow import Workflow, manager
 
-from workflow import manager, Workflow
-
-from .conftest import env, ENV_V4
+from tests.conftest import ENV_V4, env
 
 
 def test_directories(alfred4):

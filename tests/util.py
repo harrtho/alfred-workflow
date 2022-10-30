@@ -11,18 +11,18 @@
 
 """Stuff used in multiple tests."""
 
-from io import StringIO
-import sys
 import os
 import shutil
 import subprocess
+import sys
 import tempfile
+from io import StringIO
 
 INFO_PLIST_TEST4 = os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                               'data/info.plist.alfred4')
+                                'data/info.plist.alfred4')
 
 INFO_PLIST_TEST = os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                                'data/info.plist.alfred5')
+                               'data/info.plist.alfred5')
 
 
 INFO_PLIST_PATH = os.path.join(os.path.abspath(os.getcwd()),

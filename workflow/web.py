@@ -20,9 +20,9 @@ import re
 import socket
 import string
 import unicodedata
-import urllib.request
-import urllib.parse
 import urllib.error
+import urllib.parse
+import urllib.request
 import zlib
 
 __version__ = open(os.path.join(os.path.dirname(__file__), 'version')).read()

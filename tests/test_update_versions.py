@@ -14,7 +14,6 @@
 import unittest
 
 import pytest
-
 from workflow.update import Version
 
 

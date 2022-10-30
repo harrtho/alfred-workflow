@@ -14,9 +14,7 @@ import os
 import sys
 
 import pytest
-
 from workflow import Workflow
-
 
 LIBS = [os.path.join(os.path.dirname(__file__), 'lib')]
 

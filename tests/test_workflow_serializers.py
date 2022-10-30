@@ -14,14 +14,9 @@
 import os
 
 import pytest
-
-from workflow.workflow import (
-    SerializerManager,
-    JSONSerializer,
-    PickleSerializer,
-    manager as default_manager,
-)
-
+from workflow.workflow import (JSONSerializer, PickleSerializer,
+                               SerializerManager)
+from workflow.workflow import manager as default_manager
 
 # default serializers
 SERIALIZERS = ('json', 'pickle')

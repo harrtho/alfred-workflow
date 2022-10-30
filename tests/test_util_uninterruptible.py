@@ -15,7 +15,6 @@ import os
 import signal
 
 import pytest
-
 from workflow.util import uninterruptible
 
 

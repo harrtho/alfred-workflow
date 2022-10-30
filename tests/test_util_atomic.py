@@ -15,10 +15,9 @@ import json
 import os
 
 import pytest
-
-from .util import DEFAULT_SETTINGS
-
 from workflow.util import atomic_writer
+
+from tests.util import DEFAULT_SETTINGS
 
 
 def _settings(tempdir):

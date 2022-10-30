@@ -12,12 +12,11 @@
 """Common pytest fixtures."""
 
 import os
+from contextlib import contextmanager
 from shutil import rmtree
 from tempfile import mkdtemp
-from contextlib import contextmanager
 
 import pytest
-
 from workflow import Workflow
 
 from tests.util import INFO_PLIST_TEST, INFO_PLIST_TEST4, InfoPlist

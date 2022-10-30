@@ -18,11 +18,11 @@ See :ref:`the User Manual <background-processes>` for more information
 and examples.
 """
 
-import signal
-import sys
 import os
-import subprocess
 import pickle
+import signal
+import subprocess
+import sys
 
 from workflow import Workflow
 

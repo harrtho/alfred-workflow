@@ -15,7 +15,6 @@ import os
 from time import sleep
 
 import pytest
-
 from workflow import Workflow
 from workflow.background import is_running, kill, run_in_background
 

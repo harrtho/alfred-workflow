@@ -10,15 +10,14 @@
 #
 """Unit tests for Workflow.run."""
 
-from io import StringIO
-import sys
 import json
+import sys
+from io import StringIO
 
 import pytest
-
 from workflow import Workflow
 
-from .conftest import env
+from tests.conftest import env
 
 
 def test_run_fails(infopl):

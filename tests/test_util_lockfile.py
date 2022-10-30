@@ -12,19 +12,17 @@
 """Test LockFile functionality."""
 
 
-from collections import namedtuple
-from multiprocessing import Pool
 import os
 import shutil
 import sys
 import tempfile
 import traceback
+from collections import namedtuple
+from multiprocessing import Pool
 
 import pytest
-
 from workflow.util import AcquisitionError, LockFile
 from workflow.workflow import Settings
-
 
 Paths = namedtuple('Paths', 'testfile lockfile')
 

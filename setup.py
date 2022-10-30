@@ -11,9 +11,9 @@
 
 """Alfred-PyWorkflow library for building Alfred 4 and 5 workflows."""
 
-import os
-from os.path import dirname, join
 import subprocess
+from os.path import dirname, join
+
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
 

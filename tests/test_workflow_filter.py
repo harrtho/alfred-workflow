@@ -11,13 +11,10 @@
 """Unit tests for :meth:`workflow.Workflow.filter`."""
 
 import pytest
-
-from workflow.workflow import (
-    MATCH_ALL, MATCH_ALLCHARS,
-    MATCH_ATOM, MATCH_CAPITALS, MATCH_STARTSWITH,
-    MATCH_SUBSTRING, MATCH_INITIALS_CONTAIN,
-    MATCH_INITIALS_STARTSWITH,
-)
+from workflow.workflow import (MATCH_ALL, MATCH_ALLCHARS, MATCH_ATOM,
+                               MATCH_CAPITALS, MATCH_INITIALS_CONTAIN,
+                               MATCH_INITIALS_STARTSWITH, MATCH_STARTSWITH,
+                               MATCH_SUBSTRING)
 
 SEARCH_ITEMS = [
     ('Test Item One', MATCH_STARTSWITH),

@@ -10,8 +10,8 @@
 #
 """Unit tests for :mod:`workflow.web`"""
 
-import os
 import json
+import os
 import shutil
 import socket
 import tempfile
@@ -23,9 +23,7 @@ from base64 import b64decode
 from pprint import pprint
 
 import pytest
-import pytest_localserver  # noqa: F401
 from workflow import web
-
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
 

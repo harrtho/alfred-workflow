@@ -11,11 +11,9 @@
 """Unit tests for Keychain API."""
 
 import pytest
+from workflow import KeychainError, PasswordNotFound
 
-from workflow import PasswordNotFound, KeychainError
-
-from .conftest import BUNDLE_ID
-
+from tests.conftest import BUNDLE_ID
 
 ACCOUNT = 'this-is-my-test-account'
 PASSWORD = 'hunter2'

@@ -14,13 +14,13 @@
 import json
 import os
 import shutil
-import time
 import tempfile
+import time
 import unittest
 
 from workflow.workflow import Settings
 
-from .util import DEFAULT_SETTINGS
+from tests.util import DEFAULT_SETTINGS
 
 
 class SettingsTests(unittest.TestCase):

@@ -11,24 +11,16 @@
 
 """Unit tests for Workflow's update API."""
 
+import os
 from contextlib import contextmanager
 
-import os
 import pytest
-import pytest_localserver  # noqa: F401
+from workflow import Workflow, update
 
-from workflow import Workflow
-from workflow import update
-
-from .conftest import env
-from .util import (
-    WorkflowMock,
-    create_info_plist,
-    delete_info_plist,
-    dump_env,
-)
-from .test_update import fakeresponse, RELEASES_JSON, HTTP_HEADERS_JSON
-
+from tests.conftest import env
+from tests.test_update import HTTP_HEADERS_JSON, RELEASES_JSON, fakeresponse
+from tests.util import (WorkflowMock, create_info_plist, delete_info_plist,
+                        dump_env)
 
 UPDATE_SETTINGS = {
     'github_slug': 'harrtho/alfred-pyworkflow-dummy',

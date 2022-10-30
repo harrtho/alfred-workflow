@@ -11,16 +11,15 @@
 
 """Unit tests for update mechanism."""
 
-from contextlib import contextmanager
 import os
 import re
+from contextlib import contextmanager
 
 import pytest
-import pytest_localserver  # noqa: F401
-
-from .util import WorkflowMock
 from workflow import Workflow, update, web
 from workflow.update import Download, Version
+
+from tests.util import WorkflowMock
 
 # Where test data is
 DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')

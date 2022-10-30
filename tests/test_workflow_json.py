@@ -11,13 +11,12 @@
 
 """Unit tests for Workflow's JSON feedback generation."""
 
+import json
+import sys
 from contextlib import contextmanager
 from io import StringIO
-import sys
-import json
 
 import pytest
-
 from workflow import Workflow
 
 
