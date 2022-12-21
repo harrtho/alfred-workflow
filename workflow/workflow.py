@@ -2790,7 +2790,8 @@ class Workflow(object):
 
         from .background import run_in_background
 
-        cmd = ['/usr/bin/env python3', '-m', 'workflow.update', 'install', repo, version]
+        cmd = ['/usr/bin/env', 'python3', '-m',
+               'workflow.update', 'install', repo, version]
 
         if self.prereleases:
             cmd.append('--prereleases')
