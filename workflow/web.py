@@ -88,9 +88,10 @@ def byte_dict(dic):
 
     """
     if isinstance(dic, CaseInsensitiveDictionary):
-        dic2 = CaseInsensitiveDictionary()
+        dic2 = CaseInsensitiveDictionary()  # pragma: no cover
     else:
         dic2 = {}
+
     for k, v in dic.items():
         if isinstance(k, str):
             k = k.encode('utf-8')
@@ -556,9 +557,6 @@ def request(method, url, params=None, data=None, headers=None, cookies=None,
         headers.update(new_headers)
     elif data and isinstance(data, dict):
         data = urllib.parse.urlencode(byte_dict(data))
-
-    # Make sure everything is encoded text
-    headers = byte_dict(headers)
 
     if isinstance(data, str):
         data = data.encode('utf-8')
