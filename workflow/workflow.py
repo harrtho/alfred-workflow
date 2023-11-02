@@ -2328,7 +2328,7 @@ class Workflow(object):
                                 (item, score, rule)))
 
         # sort on keys, then discard the keys
-        results.sort(reverse=ascending)
+        results.sort(key=lambda x: x[1][1], reverse=ascending)
         results = [t[1] for t in results]
 
         if min_score:
