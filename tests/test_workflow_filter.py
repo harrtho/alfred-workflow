@@ -11,6 +11,7 @@
 """Unit tests for :meth:`workflow.Workflow.filter`."""
 
 import pytest
+
 from workflow.workflow import (MATCH_ALL, MATCH_ALLCHARS, MATCH_ATOM,
                                MATCH_CAPITALS, MATCH_INITIALS_CONTAIN,
                                MATCH_INITIALS_STARTSWITH, MATCH_STARTSWITH,
@@ -200,6 +201,25 @@ def test_punctuation(wf):
     """Punctuation: dumbified"""
     for input, output in PUNCTUATION_DATA:
         assert wf.dumbify_punctuation(input) == output
+
+
+def test_filter_sort_keys_only(wf):
+    """Filter: identical items, not sortable data"""
+    data = [
+        {'key': 'keyA', 'value': 'a1'},
+        {'key': 'keyA', 'value': 'a2'},
+        {'key': 'keyB', 'value': 'b'},
+        {'key': 'keyC', 'value': 'c'}
+    ]
+    results = wf.filter(
+        "key",
+        data,
+        key=lambda x: x["key"],
+    )
+
+    for index, output in enumerate(data):
+        assert results[index]['key'] == output['key']
+        assert results[index]['value'] == output['value']
 
 
 if __name__ == '__main__':  # pragma: no cover
