@@ -7,13 +7,6 @@ Contributing
 
 Alfred-Workflow is an open-source project and contributions are welcome.
 
-.. important::
-
-    **Do not submit yet another feature request for Python 3 support**
-
-    I am aware of the existence of Python 3. There will be a rewrite of the library that removes all the crufy and only supports Python 3 when I get around to it.
-
-
 .. _bugs:
 
 Feature requests and bugs

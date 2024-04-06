@@ -16,7 +16,7 @@ A helper library in Python for authors of workflows for [Alfred 4 and 5][alfred]
 [![Supported Python Versions][shield-pyversions]][pypi]
 
 <!-- [![Downloads][shield-download]][pypi] -->
-Supports Alfred 4 and Alfred 5 on macOS Catalina or later with Python 3.7+.
+Supports Alfred 4 and Alfred 5 on macOS Catalina or later with Python 3.8+.
 
 Alfred-PyWorkflow is a Python 3 port of the original [Alfred-Workflow][alfred-workflow].
 
